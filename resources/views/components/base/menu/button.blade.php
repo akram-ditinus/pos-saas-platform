@@ -4,7 +4,7 @@
     <x-dynamic-component
         data-tw-toggle="dropdown"
         aria-expanded="false"
-        {{ $attributes->class(['cursor-pointer'])->merge($attributes->whereDoesntStartWith('class')->getAttributes()) }}
+        {{ $attributes->class(['cursor-pointer'])->merge($attributes->whereDoesntStartWith(['class','href'])->getAttributes()) }}
         :component="substr($as, 2)"
     >{{ $slot }}</x-dynamic-component>
 @else

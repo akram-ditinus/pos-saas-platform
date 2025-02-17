@@ -16,9 +16,14 @@ return new class extends Migration
             $table->string('uuid');
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('user_type')->default('user')->comment('admin,user');
+            $table->string('profile_image')->default('images/user.png');
+            $table->decimal('total_ernings',10,2)->default(0.00);
+            $table->string('login_platform')->comment('web,andoird,ios')->default('web');
+            $table->string('status')->comment('pending,active,inactive')->default('active');
             $table->rememberToken();
             $table->timestamps();
         });

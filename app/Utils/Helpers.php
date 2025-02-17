@@ -78,3 +78,29 @@ if (!function_exists('getFileList')) {
         return $files;
     }
 }
+
+
+/**
+ * Generate rendom charactor with lenth and model name
+ *
+ * @param Length   $length  how much charactors will be returned
+ * @param Model   $modelName Name of eloquent model
+ * @return String
+ */ 
+if (! function_exists('getRandomCharactor')) {
+    function getRandomCharactor($length=12,$modelName='User')
+    {
+        $str='abcdefghijklmnopqrstuvwxyz1234567890';
+        $randomString=substr(str_shuffle($str),0,$length);
+        if(empty($table)){
+            return $randomString;
+        }else{
+            $model_name = '\\App\\Models\\'.$modelName;
+            $model = new $model_name;
+            while($model::where('id',$randomString)->exists()){
+                $randomString=substr(str_shuffle($str),0,$length);
+            }
+            return $randomString;
+        }
+    }
+}

@@ -18,6 +18,12 @@ class SideMenu
                 'title' => "E-Commerce",
             ],
             [
+                'icon' => "UserSquare",
+                'route_name' => "admin.users.index",
+                'params' => [],
+                'title' => "Users",
+            ],
+            [
                 'icon' => "ActivitySquare",
                 'route_name' => "dashboard-overview-2",
                 'params' => [],
