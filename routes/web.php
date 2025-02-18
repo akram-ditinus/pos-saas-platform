@@ -25,13 +25,13 @@ Route::get('color-scheme-switcher/{activeColorScheme}', [ColorSchemeController::
 
 Route::controller(PageController::class)->group(function () {
     Route::get('/', 'dashboardOverview1')->name('dashboard-overview-1');
-    Route::get('dashboard-overview-2', 'dashboardOverview2')->name('dashboard-overview-2');
-    Route::get('dashboard-overview-3', 'dashboardOverview3')->name('dashboard-overview-3');
-    Route::get('dashboard-overview-4', 'dashboardOverview4')->name('dashboard-overview-4');
-    Route::get('dashboard-overview-5', 'dashboardOverview5')->name('dashboard-overview-5');
-    Route::get('dashboard-overview-6', 'dashboardOverview6')->name('dashboard-overview-6');
-    Route::get('dashboard-overview-7', 'dashboardOverview7')->name('dashboard-overview-7');
-    Route::get('dashboard-overview-8', 'dashboardOverview8')->name('dashboard-overview-8');
+    // Route::get('dashboard-overview-2', 'dashboardOverview2')->name('dashboard-overview-2');
+    // Route::get('dashboard-overview-3', 'dashboardOverview3')->name('dashboard-overview-3');
+    // Route::get('dashboard-overview-4', 'dashboardOverview4')->name('dashboard-overview-4');
+    // Route::get('dashboard-overview-5', 'dashboardOverview5')->name('dashboard-overview-5');
+    // Route::get('dashboard-overview-6', 'dashboardOverview6')->name('dashboard-overview-6');
+    // Route::get('dashboard-overview-7', 'dashboardOverview7')->name('dashboard-overview-7');
+    // Route::get('dashboard-overview-8', 'dashboardOverview8')->name('dashboard-overview-8');
     Route::get('users', 'users')->name('users');
     Route::get('departments', 'departments')->name('departments');
     Route::get('add-user', 'addUser')->name('add-user');
@@ -110,3 +110,9 @@ include('auth.php');
 
 /** User routes */
 Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+
+
+/** Super Admin Routes */
+Route::group(['prefix'=> 'admin','as'=>'admin.'], function () {
+Route::resource('users',\App\Http\Controllers\Admin\UserController::class);
+});

@@ -62,10 +62,11 @@ class AuthController extends Controller
             'email' => 'unique:users,email',
             'password' => 'required',
         ]);
-
+        
+     
 
         $user = new User();
-        $user->uuid='g74d5esw56ea'; 
+        $user->uuid=getRandomCharactor(12,'User'); 
         $user->name=$request->first_name." ".$request->first_name; 
         $user->email=$request->email; 
         $user->password=$request->password; 
