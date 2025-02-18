@@ -21,6 +21,13 @@ return new class extends Migration
             $table->string('password');
             $table->string('user_type')->default('user')->comment('admin,user');
             $table->string('profile_image')->default('images/user.png');
+            $table->string('address_line_1')->nullable();
+            $table->string('address_line2')->nullable();
+            $table->string('landmark')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('pincode')->nullable();
+            $table->string('country_id')->nullable();
             $table->decimal('total_ernings',10,2)->default(0.00);
             $table->string('login_platform')->comment('web,andoird,ios')->default('web');
             $table->string('status')->comment('pending,active,inactive')->default('active');

@@ -1,11 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\ThemeController;
-use App\Http\Controllers\ColorSchemeController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\{PageController,ThemeController,ColorSchemeController,DashboardController,UserController};
 
 /*
 |--------------------------------------------------------------------------
@@ -109,10 +105,21 @@ Route::controller(PageController::class)->group(function () {
 include('auth.php');
 
 /** User routes */
-Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
-
+Route::group(['prefix'=>'user','as'=>'user.','middleware'=> ['auth']], function () {
+    Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
+    Route::get('profile', [UserController::class,'profile'])->name('profile');
+    Route::patch('profile/{id?}', [UserController::class,'update'])->name('profile');
+    Route::patch('update-profile-image/{id?}', [UserController::class,'updateProfileImage'])->name('update.profile.image');
+});
 
 /** Super Admin Routes */
+Route::group(['prefix'=> 'super-admin','as'=>'super.admin.'], function () {
+    Route::get('dashboard', [\App\Http\Controllers\SuperAdmin\UserController::class,'dashboard'])->name('dashboard');
+    Route::resource('users',\App\Http\Controllers\SuperAdmin\UserController::class);
+});
+
+/** Resturant Admin Routes */
 Route::group(['prefix'=> 'admin','as'=>'admin.'], function () {
-Route::resource('users',\App\Http\Controllers\Admin\UserController::class);
+    Route::get('dashboard', [\App\Http\Controllers\Admin\UserController::class,'dashboard'])->name('dashboard');
+    Route::resource('users',\App\Http\Controllers\Admin\UserController::class);
 });

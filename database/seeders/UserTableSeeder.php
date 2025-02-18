@@ -12,7 +12,14 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
+        
         \App\Models\User::insert([[
+            'uuid'=>'d3d3t4g5f7e8',
+            'name'=>"Super Administrator",
+            'email'=>'super@admin.com',
+            'password'=>'$2y$12$JyKMoneGjyYOvmaXItizL..48pwJdXkrCwyzdaS7LvicXPOtBHL4C',
+            'user_type'=>'super_admin'
+        ],[
             'uuid'=>'d1rfg4g5f7e8',
             'name'=>"Administrator",
             'email'=>'admin@demo.com',
