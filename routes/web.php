@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OnboardingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,7 +112,8 @@ include('auth.php');
 /** User routes */
 Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
 
-
+Route::get('/',[OnboardingController::class,'index'])->name('index');
+Route::resource('onbording', OnboardingController::class);
 /** Super Admin Routes */
 Route::group(['prefix'=> 'admin','as'=>'admin.'], function () {
 Route::resource('users',\App\Http\Controllers\Admin\UserController::class);
