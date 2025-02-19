@@ -587,7 +587,7 @@
                     </x-base.table.tbody>
                 </x-base.table>
             </div>
-            <div class="flex flex-col-reverse flex-wrap items-center mt-3 flex-reverse gap-y-2 sm:flex-row">
+            <!-- <div class="flex flex-col-reverse flex-wrap items-center mt-3 flex-reverse gap-y-2 sm:flex-row">
                 <x-base.pagination class="flex-1 w-full mr-auto sm:w-auto">
                     <x-base.pagination.link>
                         <x-base.lucide
@@ -625,7 +625,7 @@
                     <option>35</option>
                     <option>50</option>
                 </x-base.form-select>
-            </div>
+            </div> -->
         </div>
     </div>
 @endsection
