@@ -21,16 +21,16 @@ class UserTableSeeder extends Seeder
             'user_type'=>'super_admin'
         ],[
             'uuid'=>'d1rfg4g5f7e8',
-            'name'=>"Administrator",
+            'name'=>"Restaurant Owner 1",
             'email'=>'admin@demo.com',
             'password'=>'$2y$12$JyKMoneGjyYOvmaXItizL..48pwJdXkrCwyzdaS7LvicXPOtBHL4C',
-            'user_type'=>'admin'
+            'user_type'=>'restaurant_owner'
         ],[
-            'uuid'=>'d1rfg4g5f7e8',
-            'name'=>"Test User",
-            'email'=>'user@demo.com',
+            'uuid'=>'e4f6deg5f7e8',
+            'name'=>"Restaurant Owner 2",
+            'email'=>'admin@demo2.com',
             'password'=>'$2y$12$JyKMoneGjyYOvmaXItizL..48pwJdXkrCwyzdaS7LvicXPOtBHL4C',
-            'user_type'=>'user'
+            'user_type'=>'restaurant_owner'
         ]]);
     }
 }

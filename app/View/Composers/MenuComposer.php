@@ -2,8 +2,10 @@
 
 namespace App\View\Composers;
 
+use App\Main\RestaurantOwnerMenu;
 use Illuminate\View\View;
 use App\Main\SideMenu;
+use App\Main\SuperAdminMenu;
 
 class MenuComposer
 {
@@ -16,7 +18,16 @@ class MenuComposer
             $routeName = request()->route()->getName();
             $activeMenu = $this->activeMenu($routeName);
 
-            $view->with('sideMenu', SideMenu::menu());
+            if (auth()->check()) {
+                if (auth()->user()->user_type == "super_admin") {
+                    $view->with('sideMenu', SuperAdminMenu::menu());
+                }
+                if (auth()->user()->user_type == "restaurant_owner") {
+                    $view->with('sideMenu', RestaurantOwnerMenu::menu());
+                }
+            } else {
+                $view->with('sideMenu', SideMenu::menu());
+            }
             $view->with('firstLevelActiveIndex', $activeMenu['first_level_active_index']);
             $view->with('secondLevelActiveIndex', $activeMenu['second_level_active_index']);
             $view->with('thirdLevelActiveIndex', $activeMenu['third_level_active_index']);

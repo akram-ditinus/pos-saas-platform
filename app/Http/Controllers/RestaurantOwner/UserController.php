@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\RestaurantOwner;
 
 use App\Fakers\Countries;
 use App\Fakers\Languages;
 use App\Fakers\RecentDevices;
 use App\Fakers\Timezones;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-
+    
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $allUsers = \App\Models\User::where('user_type','restaurant_owner')->get();
-        return view("super_admin.users.index",compact("allUsers"));
+        $allUsers = \App\Models\User::where('user_type','!=','super_admin')->get();
+        return view("admin.restaurant_owner.index",compact("allUsers"));
     }
 
     /**
@@ -26,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view("admin.restaurant_owner.create");
     }
 
     /**
@@ -34,11 +35,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required',
+            'phone' => 'numeric',
+        ]);
+
+        $user = new \App\Models\User();
+        $user->uuid=getRandomCharactor(12,'User'); 
+        $user->name=$request->name; 
+        $user->email=$request->email; 
+        $user->phone=$request->phone; 
+        $user->password=$request->password; 
+        $user->save();
+
+        return redirect()->route('admin.restaurant_owner.index')->with("success","User created successfully");
     }
+
+    
     public function profile()
     {
-        return view('super_admin.profile',[
+
+        return view('restaurant_owner.profile',[
             'countries' => getCountriesArray(),
             'languages' => Languages::fakeLanguages(),
             'timezones' => Timezones::fakeTimezones(),
@@ -59,8 +78,7 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $user = \App\Models\User::find($id);
-        $countries = getCountriesArray();
-        return view("super_admin.users.edit",compact("user","countries"));
+        return view("admin.restaurant_owner.edit",compact("user"));
     }
 
     /**
@@ -78,7 +96,7 @@ class UserController extends Controller
             //$user->uuid=getRandomCharactor(12,'User'); 
             $user->name=$request->name; 
             $user->phone=$request->phone; 
-            $user->address_line_1=$request->address_line_1; 
+            $user->address_line_1=$request->phone; 
             $user->address_line_2=$request->address_line_2; 
             $user->city=$request->city; 
             $user->state=$request->state; 
@@ -86,44 +104,14 @@ class UserController extends Controller
             $user->country_id=$request->country_id; 
         
             $user->save();
-            return redirect()->route('super.admin.profile')->with("success","User updated successfully");
+            return redirect()->route('restaurant.owner.profile')->with("success","User updated successfully");
         }else{
-            return redirect()->route('super.admin.profile')->with("error","User not found");
+            return redirect()->route('restaurant.owner.profile')->with("error","User not found");
         }
         
 
     }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function restaurantUpdate(Request $request)
-    {
-        
-        $request->validate([
-            'name' => 'required',
-            'phone' => 'numeric',
-        ]);
 
-        $user = \App\Models\User::where('uuid',$request->uuid)->first();
-        if($user){
-            //$user->uuid=getRandomCharactor(12,'User'); 
-            $user->name=$request->name; 
-            $user->phone=$request->phone; 
-            $user->address_line_1=$request->address_line_1; 
-            $user->address_line_2=$request->address_line_2; 
-            $user->city=$request->city; 
-            $user->state=$request->state; 
-            $user->pincode=$request->pincode; 
-            $user->country_id=$request->country_id; 
-        
-            $user->save();
-            return redirect()->route('super.admin.users.index')->with("success","User updated successfully");
-        }else{
-            return redirect()->route('super.admin.users.index')->with("error","User not found");
-        }
-        
-
-    }
 
     
     /**
@@ -131,9 +119,9 @@ class UserController extends Controller
      */
     public function updateProfileImage(Request $request)
     {
-       
+        
         $request->validate([
-            'profile_image' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',
+            'profile_image' => 'mimes:jpeg,png,jpg',
         ]);
 
         if($file = $request->hasFile('profile_image')) {
@@ -141,7 +129,7 @@ class UserController extends Controller
             $fileName = auth()->user()->uuid.".png";
             $destinationPath = public_path().'/images/users/profile' ;
             $file->move($destinationPath,$fileName);
-            return redirect('/super-admin/profile');
+            return redirect('/restaurant-owner/profile');
         }
     }
 

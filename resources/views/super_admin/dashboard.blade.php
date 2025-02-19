@@ -1,7 +1,7 @@
-@extends('../themes/' . $activeTheme)
+@extends('super_admin/layouts/app')
 
 @section('subhead')
-    <title>POS System</title>
+    <title>POS System - Super Admin Panel</title>
 @endsection
 
 @section('subcontent')

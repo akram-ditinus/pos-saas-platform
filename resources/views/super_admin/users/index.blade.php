@@ -16,7 +16,7 @@
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <x-base.menu.item
                         class="group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
-                        variant="primary" href="{{route('admin.users.create')}}">
+                        variant="primary" href="{{route('super.admin.users.create')}}">
                         <x-base.lucide class="mr-2 h-4 w-4 stroke-[1.3]" icon="PenLine" />
                         Add New User
                     </x-base.menu.item>
@@ -264,7 +264,7 @@
                                                                                     icon="MoreVertical" />
                                                                             </x-base.menu.button>
                                                                             <x-base.menu.items class="w-40">
-                                                                                <x-base.menu.item href="{{route('admin.users.edit', $user->id)}}">
+                                                                                <x-base.menu.item href="{{route('super.admin.users.edit', $user->id)}}">
                                                                                     <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
                                                                                     Edit
                                                                                 </x-base.menu.item>

@@ -107,29 +107,20 @@ Route::controller(PageController::class)->group(function () {
 include('auth.php');
 
 
-
-Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
-
-Route::get('/',[OnboardingController::class,'index'])->name('index');
-Route::resource('onbording', OnboardingController::class);
-
-/** User routes */
-Route::group(['prefix'=>'user','as'=>'user.','middleware'=> ['auth']], function () {
-    Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard');
-    Route::get('profile', [UserController::class,'profile'])->name('profile');
-    Route::patch('profile/{id?}', [UserController::class,'update'])->name('profile');
-    Route::patch('update-profile-image/{id?}', [UserController::class,'updateProfileImage'])->name('update.profile.image');
-});
-
-
 /** Super Admin Routes */
-Route::group(['prefix'=> 'super-admin','as'=>'super.admin.'], function () {
-    Route::get('dashboard', [\App\Http\Controllers\SuperAdmin\UserController::class,'dashboard'])->name('dashboard');
+Route::group(['prefix'=> 'super-admin','as'=>'super.admin.','middleware'=>['auth','not.super.admin']], function () {
+    Route::get('dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class,'dashboard'])->name('dashboard');
     Route::resource('users',\App\Http\Controllers\SuperAdmin\UserController::class);
+    Route::get('profile', [\App\Http\Controllers\SuperAdmin\UserController::class,'profile'])->name('profile');
+    Route::patch('update-profile-image', [\App\Http\Controllers\SuperAdmin\UserController::class,'updateProfileImage'])->name('update.profile.image');
+    Route::patch('profile', [App\Http\Controllers\SuperAdmin\UserController::class,'update'])->name('profile');
+    Route::patch('restaturant-update/{uuid?}', [App\Http\Controllers\SuperAdmin\UserController::class,'restaurantUpdate'])->name('users.restaurant.update');
 });
 
-/** Resturant Admin Routes */
-Route::group(['prefix'=> 'admin','as'=>'admin.'], function () {
-    Route::get('dashboard', [\App\Http\Controllers\Admin\UserController::class,'dashboard'])->name('dashboard');
-    Route::resource('users',\App\Http\Controllers\Admin\UserController::class);
+/** Resturant Owner Routes */
+Route::group(['prefix'=> 'restaurant-owner','as'=>'restaurant.owner.','middleware'=> ['auth']], function () {
+    Route::get('dashboard', [\App\Http\Controllers\RestaurantOwner\DashboardController::class,'dashboard'])->name('dashboard');
+    Route::get('profile', [\App\Http\Controllers\RestaurantOwner\UserController::class,'profile'])->name('profile');
+    Route::patch('profile', [App\Http\Controllers\RestaurantOwner\UserController::class,'update'])->name('profile');
+    Route::patch('update-profile-image', [\App\Http\Controllers\RestaurantOwner\UserController::class,'updateProfileImage'])->name('update.profile.image');
 });

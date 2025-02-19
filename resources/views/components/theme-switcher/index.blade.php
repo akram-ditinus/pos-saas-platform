@@ -39,12 +39,12 @@
                             @endforeach
                         </div>
                     </div>
-                    <div class="border-b border-dashed"></div>
+                    {{-- <div class="border-b border-dashed"></div>
                     <div class="px-8 pt-6 pb-8">
                         <div class="text-base font-medium">Themes</div>
                         <div class="mt-0.5 text-slate-500">Choose your themes</div>
                         <div class="mt-5 grid grid-cols-2 gap-x-5 gap-y-3.5 sm:grid-cols-3">
-                            @foreach (['echo', 'hurricane', 'ravage', 'hook', 'razor', 'havoc', 'dagger', 'shuriken', 'raze', 'exort', 'viper'] as $themeKey => $theme)
+                            @foreach (['echo'] as $themeKey => $theme)
                                 <div>
                                     <a
                                         href="{{ route('theme-switcher', ['activeTheme' => $theme]) }}"
@@ -67,7 +67,7 @@
                             @endforeach
                         </div>
                     </div>
-                    <!-- <div>
+                    <div>
               <div class="text-base font-medium">Scheme</div>
               <div class="mt-0.5 text-slate-400">
                 Choose light or dark mode
@@ -86,7 +86,7 @@
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>  --}}
                 </div>
             </x-base.slideover.description>
         </x-base.slideover.panel>
