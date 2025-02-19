@@ -143,70 +143,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            {{-- <div
-                                class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                                <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                    <div class="text-left">
-                                        <div class="flex items-center">
-                                            <div class="font-medium">Date of Birth</div>
-                                            <div
-                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
-                                                Required
-                                            </div>
-                                        </div>
-                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                            This information is required to verify your age and
-                                            provide age-appropriate services.
-                                        </div>
-                                    </div>
-                                </label>
-                                <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.litepicker />
-                                </div>
-                            </div>
-                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
-                                <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
-                                    <div class="text-left">
-                                        <div class="flex items-center">
-                                            <div class="font-medium">Gender</div>
-                                        </div>
-                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
-                                            Select your gender from the options.
-                                        </div>
-                                    </div>
-                                </label>
-                                <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <div class="flex flex-col items-center md:flex-row">
-                                        <div
-                                            class="w-full rounded-md border border-slate-300/60 bg-white px-3 py-2 shadow-sm first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
-                                            <x-base.form-check>
-                                                <x-base.form-check.input id="checkbox-switch-1" type="radio" value="" />
-                                                <x-base.form-check.label for="checkbox-switch-1">
-                                                    Male
-                                                </x-base.form-check.label>
-                                            </x-base.form-check>
-                                        </div>
-                                        <div
-                                            class="w-full rounded-md border border-slate-300/60 bg-white px-3 py-2 shadow-sm first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
-                                            <x-base.form-check>
-                                                <x-base.form-check.input id="checkbox-switch-2" type="radio" value="" />
-                                                <x-base.form-check.label for="checkbox-switch-2">
-                                                    Female
-                                                </x-base.form-check.label>
-                                            </x-base.form-check>
-                                        </div>
-                                        <div
-                                            class="w-full rounded-md border border-slate-300/60 bg-white px-3 py-2 shadow-sm first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0">
-                                            <x-base.form-check>
-                                                <x-base.form-check.input id="checkbox-switch-3" type="radio" value="" />
-                                                <x-base.form-check.label for="checkbox-switch-3">
-                                                    Prefer Not to Say
-                                                </x-base.form-check.label>
-                                            </x-base.form-check>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
+                           
                             <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                                 <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                     <div class="text-left">

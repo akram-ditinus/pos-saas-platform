@@ -1,22 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\SuperAdmin;
 
-use App\Fakers\Ecommerce;
-use App\Fakers\Transactions;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
+    public function dashboard()
+    {
+        return 'super admin dashboard';
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view("user.dashboard", [
-            'ecommerce' => Ecommerce::fakePerformanceInsights(),
-            'transactions' => Transactions::fakeTransactions(),
-        ]);
+        return 'super admin';
     }
 
     /**

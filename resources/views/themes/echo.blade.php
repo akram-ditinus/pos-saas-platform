@@ -349,7 +349,7 @@
                                         Reset Password
                                     </x-base.menu.item>
                                     <x-base.menu.divider />
-                                    <x-base.menu.item href="{{ route('settings') }}">
+                                    <x-base.menu.item href="{{ route('user.profile') }}">
                                         <x-base.lucide
                                             class="w-4 h-4 mr-2"
                                             icon="Users"

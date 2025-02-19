@@ -11,6 +11,13 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function dashboard()
+    {
+        return 'dashboard';
+    }
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
         $allUsers = \App\Models\User::where('user_type','!=','admin')->get();
