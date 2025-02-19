@@ -2,7 +2,7 @@
 
 @section('head')
     @yield('subhead')
-@endsection
+@endsection 
 
 @section('content')
     <div @class([
