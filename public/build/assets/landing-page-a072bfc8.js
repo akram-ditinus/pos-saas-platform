@@ -1,0 +1,1 @@
+(function(){const o=()=>{document.body.scrollTop>50||document.documentElement.scrollTop>50?$(".background").first().addClass("background--hidden"):$(".background").first().removeClass("background--hidden")};o(),window.onscroll=()=>{o()}})();
