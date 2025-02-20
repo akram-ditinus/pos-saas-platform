@@ -1,7 +1,7 @@
-@extends('../themes/' . $activeTheme)
+@extends('super_admin/layouts/app')
 
 @section('subhead')
-    <title>POS System - {{$activeTheme}}</title>
+    <title>POS System</title>
 @endsection
 
 @section('subcontent')
@@ -142,7 +142,7 @@
                                         <a class="absolute right-0 top-0 mr-3 mt-3" data-tw-dismiss="modal" href="#">
                                             <x-base.lucide class="h-8 w-8 text-slate-400" icon="X" />
                                         </a>
-                                        <form method="post" action="{{route('user.update.profile.image',auth()->user()->id)}}" enctype="multipart/form-data">
+                                        <form method="post" action="{{route('super.admin.update.profile.image')}}" enctype="multipart/form-data">
                                             @csrf
                                             @method('patch')       
                                         <div class="p-5 text-center">
@@ -172,7 +172,9 @@
                      
                     </div>
                     @if (is_null(request()->query('page')))
-                    <form method="post" action="{{route('user.profile',auth()->user()->id)}}">
+                    <form method="post" action="{{route('super.admin.profile')}}">
+                        @csrf
+                        @method('patch')
                         <div class="flex flex-col p-5 box box--stacked">
                             <div class="mb-6 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
                                 Profile Info
@@ -198,7 +200,7 @@
                                         <div class="flex flex-col items-center md:flex-row">
                                             <x-base.form-input
                                                 class="first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0"
-                                                type="text" value="{{old('name',auth()->user()->name)}}" />
+                                                type="text" name="name" value="{{old('name',auth()->user()->name)}}" />
                                         </div>
                                     </div>
                                 </div>
@@ -220,7 +222,7 @@
                                         </div>
                                     </label>
                                     <div class="flex-1 w-full mt-3 xl:mt-0">
-                                        <x-base.form-input type="text" value="{{old('email',auth()->user()->email)}}"/>
+                                        <x-base.form-input type="text" name="email" value="{{old('email',auth()->user()->email)}}"/>
                                     </div>
                                 </div>
                                 <div class="flex-col block pt-5 mt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
@@ -240,7 +242,7 @@
                                         </div>
                                     </label>
                                     <div class="flex-1 w-full mt-3 xl:mt-0">
-                                        <x-base.form-input type="text" value="{{old('phone',auth()->user()->phone)}}"/>
+                                        <x-base.form-input type="text" name="phone" value="{{old('phone',auth()->user()->phone)}}"/>
                                     </div>
                                 </div>
                                 
@@ -262,7 +264,7 @@
                                         </div>
                                     </label>
                                     <div class="flex-1 w-full mt-3 xl:mt-0">
-                                        <x-base.form-input type="text" value="{{old('address_line_1',auth()->user()->address_line_1)}}" />
+                                        <x-base.form-input type="text" name="address_line_1" value="{{old('address_line_1',auth()->user()->address_line_1)}}" />
                                     </div>
                                 </div>
                                 <div class="flex-col block pt-5 mt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
@@ -279,7 +281,7 @@
                                         </div>
                                     </label>
                                     <div class="flex-1 w-full mt-3 xl:mt-0">
-                                        <x-base.form-input type="text" value="{{old('address_line_2',auth()->user()->address_line_2)}}" />
+                                        <x-base.form-input type="text" name="address_line_2" value="{{old('address_line_2',auth()->user()->address_line_2)}}" />
                                     </div>
                                 </div>
                                 <div class="flex-col block pt-5 mt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
@@ -299,7 +301,7 @@
                                         </div>
                                     </label>
                                     <div class="flex-1 w-full mt-3 xl:mt-0">
-                                        <x-base.form-input type="text"  value="{{old('City',auth()->user()->City)}}"/>
+                                        <x-base.form-input type="text" name="city" value="{{old('city',auth()->user()->city)}}"/>
                                     </div>
                                 </div>
                                 <div class="flex-col block pt-5 mt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
@@ -319,7 +321,7 @@
                                         </div>
                                     </label>
                                     <div class="flex-1 w-full mt-3 xl:mt-0">
-                                        <x-base.form-input type="text"  value="{{old('state',auth()->user()->state)}}" />
+                                        <x-base.form-input type="text" name="state" value="{{old('state',auth()->user()->state)}}" />
                                     </div>
                                 </div>
                                 <div class="flex-col block pt-5 mt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
@@ -339,7 +341,7 @@
                                         </div>
                                     </label>
                                     <div class="flex-1 w-full mt-3 xl:mt-0">
-                                        <x-base.form-input type="text" value="{{old('pincode',auth()->user()->pincode)}}" />
+                                        <x-base.form-input type="text" name="pincode" value="{{old('pincode',auth()->user()->pincode)}}" />
                                     </div>
                                 </div>
                                 
@@ -360,10 +362,10 @@
                                         </div>
                                     </label>
                                     <div class="flex-1 w-full mt-3 xl:mt-0">
-                                        <x-base.tom-select class="w-full" data-placeholder="Select your country" name="country">
-                                            @foreach ($countries as $fakerKey => $faker)
-                                                <option value="{{ $fakerKey }}" @if($fakerKey==auth()->user()->country_id) selected @endif>
-                                                    {{ $faker['name'] }}
+                                        <x-base.tom-select class="w-full" data-placeholder="Select your country" name="country_id">
+                                            @foreach ($countries as $key => $country)
+                                                <option value="{{ $country['dial_code'] }}" @if($country['dial_code']==auth()->user()->country_id) selected @endif>
+                                                    {{ $country['name'] }}
                                                 </option>
                                             @endforeach
                                         </x-base.tom-select>

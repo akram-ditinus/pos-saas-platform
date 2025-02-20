@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('user_type')->default('user')->comment('admin,user');
+            $table->string('user_type')->default('user')->comment('super_admin,restaurant_owner,restaurant');
             $table->string('profile_image')->default('images/user.png');
             $table->string('address_line_1')->nullable();
-            $table->string('address_line2')->nullable();
+            $table->string('address_line_2')->nullable();
             $table->string('landmark')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();

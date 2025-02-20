@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="mt-7">
-                <form method="POST" action="{{route('admin.users.update',$user['uuid'])}}">
+                <form method="POST" action="{{route('super.admin.users.restaurant.update',$user['uuid'])}}">
                     @method('PATCH')
                     @csrf
                     <div class="box box--stacked flex flex-col">
@@ -237,8 +237,146 @@
                             @enderror
                                 </div>
                             </div>
-
-
+                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                    <div class="text-left">
+                                        <div class="flex items-center">
+                                            <div class="font-medium">Address Line</div>
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                Required
+                                            </div>
+                                        </div>
+                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                            Please provide a valid email address that you have access
+                                            to.
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <x-base.form-input type="text" value="{{ old('address_line_1',$user['address_line_1']) }}" name='address_line_1' />
+                                    @error('address_line_1')
+                                <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
+                                    {{ $message }}
+                                    <x-base.alert.dismiss-button class="btn-close" type="button" aria-label="Close">
+                                        <x-base.lucide class="h-4 w-4" icon="X" />
+                                    </x-base.alert.dismiss-button>
+                                </x-base.alert>
+                            @enderror
+                                </div>
+                            </div>
+                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                    <div class="text-left">
+                                        <div class="flex items-center">
+                                            <div class="font-medium">Address Line 2</div>
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                Required
+                                            </div>
+                                        </div>
+                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                            Please provide a valid email address that you have access
+                                            to.
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <x-base.form-input type="text" value="{{ old('address_line_2',$user['address_line_2']) }}" name='address_line_2' />
+                                    @error('address_line_2')
+                                <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
+                                    {{ $message }}
+                                    <x-base.alert.dismiss-button class="btn-close" type="button" aria-label="Close">
+                                        <x-base.lucide class="h-4 w-4" icon="X" />
+                                    </x-base.alert.dismiss-button>
+                                </x-base.alert>
+                            @enderror
+                                </div>
+                            </div>
+                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                    <div class="text-left">
+                                        <div class="flex items-center">
+                                            <div class="font-medium">State</div>
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                Required
+                                            </div>
+                                        </div>
+                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                            Please provide a valid email address that you have access
+                                            to.
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <x-base.form-input type="text" value="{{ old('state',$user['state']) }}" name='state' />
+                                    @error('state')
+                                <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
+                                    {{ $message }}
+                                    <x-base.alert.dismiss-button class="btn-close" type="button" aria-label="Close">
+                                        <x-base.lucide class="h-4 w-4" icon="X" />
+                                    </x-base.alert.dismiss-button>
+                                </x-base.alert>
+                            @enderror
+                                </div>
+                            </div>
+                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                    <div class="text-left">
+                                        <div class="flex items-center">
+                                            <div class="font-medium">City</div>
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                Required
+                                            </div>
+                                        </div>
+                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                            Please provide a valid email address that you have access
+                                            to.
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <x-base.form-input type="text" value="{{ old('city',$user['city']) }}" name='city' />
+                                    @error('city')
+                                <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
+                                    {{ $message }}
+                                    <x-base.alert.dismiss-button class="btn-close" type="button" aria-label="Close">
+                                        <x-base.lucide class="h-4 w-4" icon="X" />
+                                    </x-base.alert.dismiss-button>
+                                </x-base.alert>
+                            @enderror
+                                </div>
+                            </div>
+                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                    <div class="text-left">
+                                        <div class="flex items-center">
+                                            <div class="font-medium">Pincode</div>
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                Required
+                                            </div>
+                                        </div>
+                                        <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                            Please provide a valid email address that you have access
+                                            to.
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <x-base.form-input type="text" value="{{ old('pincode',$user['pincode']) }}" name='pincode' />
+                                    @error('pincode')
+                                <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
+                                    {{ $message }}
+                                    <x-base.alert.dismiss-button class="btn-close" type="button" aria-label="Close">
+                                        <x-base.lucide class="h-4 w-4" icon="X" />
+                                    </x-base.alert.dismiss-button>
+                                </x-base.alert>
+                            @enderror
+                                </div>
+                            </div>
                             <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                                 <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                     <div class="text-left">
@@ -260,6 +398,39 @@
                                 </div>
                             </div>
                         </div>
+                        
+
+
+
+                        <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                            <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                <div class="text-left">
+                                    <div class="flex items-center">
+                                        <div class="font-medium">Country</div>
+                                    </div>
+                                    <div class="mt-1.5 text-xs leading-relaxed text-slate-500/80 xl:mt-3">
+                                        Choose your department or division from the list of
+                                        available options.
+                                    </div>
+                                </div>
+                            </label>
+                            <div class="mt-3 w-full flex-1 xl:mt-0">
+                                <x-base.tom-select class="w-full" data-placeholder="Select your country" name="country_id">
+                                    @foreach ($countries as $key => $country)
+                                        <option value="{{ $country['dial_code'] }}" @if($country['dial_code']==$user->country_id) selected @endif>
+                                            {{ $country['name'] }}
+                                        </option>
+                                    @endforeach
+                                </x-base.tom-select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                        
+
+
+
                         <div class="flex border-t border-slate-200/80 px-7 py-5 md:justify-end">
                             <x-base.button class="w-full border-primary/50 px-10 md:w-auto" variant="outline-primary">
                                 <x-base.lucide class="-ml-2 mr-2 h-4 w-4 stroke-[1.3]" icon="Pocket" />

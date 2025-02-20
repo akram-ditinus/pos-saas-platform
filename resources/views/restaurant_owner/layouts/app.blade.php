@@ -1,4 +1,4 @@
-@extends('../themes/base')
+@extends('../../themes/base')
 
 @section('head')
     @yield('subhead')
@@ -41,7 +41,7 @@
                 ])>
                     <a
                         class="flex items-center transition-[margin] duration-300 group-[.side-menu--collapsed.side-menu--on-hover]:xl:ml-0 group-[.side-menu--collapsed]:xl:ml-2"
-                        href=""
+                        href="{{route('restaurant.owner.dashboard')}}"
                     >
                         <div
                             class="flex h-[34px] w-[34px] items-center justify-center rounded-lg bg-gradient-to-b from-theme-1 to-theme-2/80 transition-transform ease-in-out group-[.side-menu--collapsed.side-menu--on-hover]:xl:-rotate-180">
@@ -55,7 +55,7 @@
                         </div>
                         <div
                             class="ml-3.5 font-medium transition-opacity group-[.side-menu--collapsed.side-menu--on-hover]:xl:opacity-100 group-[.side-menu--collapsed]:xl:opacity-0">
-                            ECHO
+                            Dashboard
                         </div>
                     </a>
                     <a
@@ -349,7 +349,7 @@
                                         Reset Password
                                     </x-base.menu.item>
                                     <x-base.menu.divider />
-                                    <x-base.menu.item href="#">
+                                    <x-base.menu.item href="{{ route('restaurant.owner.profile') }}">
                                         <x-base.lucide
                                             class="w-4 h-4 mr-2"
                                             icon="Users"

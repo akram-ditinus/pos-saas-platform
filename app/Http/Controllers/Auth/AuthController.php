@@ -35,7 +35,10 @@ class AuthController extends Controller
  
         if (auth()->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('user.dashboard');
+            if(auth()->user()->user_type=='super_admin'){
+                return redirect()->route('super.admin.dashboard');
+            }
+            return redirect()->route('restaurant.owner.dashboard');
         }
         
         return back()->withErrors([
@@ -64,20 +67,21 @@ class AuthController extends Controller
         ]);
         
      
-
         $user = new User();
         $user->uuid=getRandomCharactor(12,'User'); 
         $user->name=$request->first_name." ".$request->first_name; 
         $user->email=$request->email; 
         $user->password=$request->password; 
+        $user->user_type='restaurant_owner'; 
         $user->save();
 
        
         if (auth()->attempt($request->only(['email','password']))) {
             $request->session()->regenerate();
-            return redirect()->route('dashboard');
+            return redirect()->route('restaurant.owner.dashboard');
         }
         
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
@@ -88,11 +92,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         auth()->guard('web')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
         return redirect('/');
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Main;
 
-class SideMenu
+class SuperAdminMenu
 {
     /**
      * List of side menu items.
@@ -17,12 +17,12 @@ class SideMenu
             //     'params' => [],
             //     'title' => "E-Commerce",
             // ],
-            // [
-            //     'icon' => "UserSquare",
-            //     'route_name' => "admin.users.index",
-            //     'params' => [],
-            //     'title' => "Restaurant Owners",
-            // ],
+            [
+                'icon' => "UserSquare",
+                'route_name' => "super.admin.users.index",
+                'params' => [],
+                'title' => "Restaurant Owners",
+            ],
             // [
             //     'icon' => "ActivitySquare",
             //     'route_name' => "dashboard-overview-2",
