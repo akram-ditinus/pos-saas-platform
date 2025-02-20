@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('subscription_plans', function (Blueprint $table) {
             $table->id();
             $table->string('uid')->unique();
-            $table->string('title')->unique();
-            $table->decimal('price',10,2)->default(0)->nullable();
+            $table->string('title');
+            $table->decimal('price',10,2)->default(0);
             $table->decimal('sale_price',10,2)->default(0)->nullable();
-            $table->decimal('duration_in_days',5,2)->default(0)->nullable();
+            $table->decimal('duration_in_days',5,2)->default(0);
             $table->decimal('trial_period_in_days',5,2)->default(0)->nullable();
-            $table->text('ramarks')->nullable();
+            $table->text('remarks')->nullable();
             $table->string('status')->default('active')->comment('active','inactive','pending')->nullable();
             $table->timestamps();
         });

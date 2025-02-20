@@ -96,13 +96,10 @@ Route::controller(PageController::class)->group(function () {
     //Route::get('login', 'login')->name('login');
     Route::get('register', 'register')->name('register');
 });
-/** --default routes provided by theme */
-
-
+/** end:default routes provided by theme */
 
 
 /**--------- custom routes ---------*/
-
 /** Auth routes */
 include('auth.php');
 
@@ -111,6 +108,7 @@ include('auth.php');
 Route::group(['prefix'=> 'super-admin','as'=>'super.admin.','middleware'=>['auth','not.super.admin']], function () {
     Route::get('dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class,'dashboard'])->name('dashboard');
     Route::resource('users',\App\Http\Controllers\SuperAdmin\UserController::class);
+    Route::resource('subscriptions',\App\Http\Controllers\SuperAdmin\SubscriptionController::class);
     Route::get('profile', [\App\Http\Controllers\SuperAdmin\UserController::class,'profile'])->name('profile');
     Route::patch('update-profile-image', [\App\Http\Controllers\SuperAdmin\UserController::class,'updateProfileImage'])->name('update.profile.image');
     Route::patch('profile', [App\Http\Controllers\SuperAdmin\UserController::class,'update'])->name('profile');

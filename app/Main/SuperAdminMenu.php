@@ -18,11 +18,17 @@ class SuperAdminMenu
             //     'title' => "E-Commerce",
             // ],
             [
+                'icon' => "CalendarRange",
+                'route_name' => "super.admin.subscriptions.index",
+                'params' => [],
+                'title' => "Subscriptions",
+            ],[
                 'icon' => "UserSquare",
                 'route_name' => "super.admin.users.index",
                 'params' => [],
                 'title' => "Restaurant Owners",
             ],
+            
             // [
             //     'icon' => "ActivitySquare",
             //     'route_name' => "dashboard-overview-2",
