@@ -11,52 +11,42 @@
 
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium group-[.mode--light]:text-white">
-                    Users
+                    Subscriptions
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <x-base.menu.item
                         class="group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
-                        variant="primary" href="{{route('super.admin.users.create')}}">
+                        variant="primary" href="{{route('super.admin.subscriptions.create')}}">
                         <x-base.lucide class="mr-2 h-4 w-4 stroke-[1.3]" icon="PenLine" />
-                        Add New User
+                        Add New Subscription
                     </x-base.menu.item>
                 </div>
             </div>
             <div class="mt-3.5 flex flex-col gap-8">
                 <div class="box box--stacked flex flex-col p-5">
-                    <div class="grid grid-cols-4 gap-5">
-                        <div
-                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                            <div class="text-base text-slate-500">Registered Users</div>
-                            <div class="mt-1.5 text-2xl font-medium">20</div>
+                    <div class="grid grid-cols-3 gap-5">
+                        <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                            <div class="text-base text-slate-500">All Subscriptions</div>
+                            <div class="mt-1.5 text-2xl font-medium">2</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
                                 
                             </div>
                         </div>
-                        <div
-                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                            <div class="text-base text-slate-500">Active Users</div>
-                            <div class="mt-1.5 text-2xl font-medium">18</div>
+                        <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                            <div class="text-base text-slate-500">Active Subscriptions</div>
+                            <div class="mt-1.5 text-2xl font-medium">1</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                               
+                                
                             </div>
                         </div>
-                        <div
-                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                            <div class="text-base text-slate-500">New Users</div>
-                            <div class="font-mediumm mt-1.5 text-2xl">2</div>
+                        <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                            <div class="text-base text-slate-500">Inactive Subscriptions</div>
+                            <div class="font-mediumm mt-1.5 text-2xl">0</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                               
+                                
                             </div>
                         </div>
-                        <div
-                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                            <div class="text-base text-slate-500">Login Activity</div>
-                            <div class="font-mediumm mt-1.5 text-2xl">5</div>
-                            <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                               
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
                 @if (session('error'))
@@ -125,13 +115,13 @@
                                             <div class="text-left text-slate-500">
                                                 Position
                                             </div>
-                                           
+
                                         </div>
                                         <div class="mt-3">
                                             <div class="text-left text-slate-500">
                                                 Department
                                             </div>
-                                            
+
                                         </div>
                                         <div class="mt-4 flex items-center">
                                             <x-base.button class="ml-auto w-32" variant="secondary">
@@ -181,7 +171,7 @@
                                 </x-base.table.tr>
                             </x-base.table.thead>
                             <x-base.table.tbody>
-                                @foreach ($allUsers as $Key => $user)
+                                @foreach ($allSubscriptions as $Key => $subscription)
                                                             <x-base.table.tr class="[&_td]:last:border-b-0">
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                                                     <x-base.form-check.input type="checkbox" />
@@ -191,24 +181,25 @@
                                                                         <div class="image-fit zoom-in h-9 w-9">
                                                                             <x-base.tippy
                                                                                 class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                                                src="{{-- Vite::asset($user['photo']) --}}" alt="POS System" as="img"
-                                                                                content="{{ $user['name'] }}" />
+                                                                                src="{{-- Vite::asset($subscription['photo']) --}}" alt="POS System"
+                                                                                as="img" content="{{ $subscription['title'] }}" />
                                                                         </div>
                                                                         <div class="ml-3.5">
                                                                             <a class="whitespace-nowrap font-medium" href="">
-                                                                                {{ $user['name'] }}
+                                                                                {{ $subscription['title'] }}
                                                                             </a>
                                                                             <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                                                                {{ $user['email'] }}
+                                                                                Price (Sale Price)<br>
+                                                                                {{ $subscription['price']}} ({{$subscription['sale_price']}})
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </x-base.table.td>
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                                                     <a class="whitespace-nowrap font-medium" href="">
-                                                                        {{ $user['user_type'] }}
+                                                                        {{ $subscription['duration_in_days'] }}
                                                                     </a>
-                                                                   
+
                                                                 </x-base.table.td>
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                                                     <div class="w-40">
@@ -224,20 +215,13 @@
                                                                     </div>
                                                                 </x-base.table.td>
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                                                    @if($user['status']=='active') @php $status='text-success' @endphp @elseif($user['status']=='inactive') @php $status='text-danger' @endphp @elseif($user['status']=='pending') @php $status='text-warning' @endphp  @endif
-                                                                    <div @class([
-                                                                        'flex items-center justify-center',
-                                                                        $status
-                                                                    ])>
-                                                                        <x-base.lucide class="h-3.5 w-3.5 stroke-[1.7]" icon="Database" />
-                                                                        <div class="ml-1.5 whitespace-nowrap">
-                                                                            {{ $user['status'] }}
+                                                                    {{$subscription['status']}}
                                                                         </div>
                                                                     </div>
                                                                 </x-base.table.td>
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                                                     <div class="whitespace-nowrap">
-                                                                        joinedDate 
+                                                                        joinedDate
                                                                     </div>
                                                                 </x-base.table.td>
                                                                 <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
@@ -248,7 +232,8 @@
                                                                                     icon="MoreVertical" />
                                                                             </x-base.menu.button>
                                                                             <x-base.menu.items class="w-40">
-                                                                                <x-base.menu.item href="{{route('super.admin.users.edit', $user->id)}}">
+                                                                                <x-base.menu.item
+                                                                                    href="{{route('super.admin.subscriptions.edit', $subscription->uid)}}">
                                                                                     <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
                                                                                     Edit
                                                                                 </x-base.menu.item>
