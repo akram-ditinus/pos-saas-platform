@@ -16,9 +16,9 @@
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <x-base.menu.item
                         class="group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
-                        variant="primary" href="{{route('super.admin.users.create')}}">
+                        variant="primary" href="{{route('restaurant.owner.restaurants.create')}}">
                         <x-base.lucide class="mr-2 h-4 w-4 stroke-[1.3]" icon="PenLine" />
-                        Add New User
+                        Add New Restaurant
                     </x-base.menu.item>
                 </div>
             </div>
@@ -181,7 +181,7 @@
                                 </x-base.table.tr>
                             </x-base.table.thead>
                             <x-base.table.tbody>
-                                @foreach ($allUsers as $Key => $user)
+                                @foreach ($restaurants as $Key => $restaurant)
                                                             <x-base.table.tr class="[&_td]:last:border-b-0">
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                                                     <x-base.form-check.input type="checkbox" />
@@ -191,22 +191,22 @@
                                                                         <div class="image-fit zoom-in h-9 w-9">
                                                                             <x-base.tippy
                                                                                 class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                                                src="{{-- Vite::asset($user['photo']) --}}" alt="POS System" as="img"
-                                                                                content="{{ $user['name'] }}" />
+                                                                                src="{{asset($restaurant->logo)}}" alt="POS System" as="img"
+                                                                                content="{{ $restaurant['title'] }}" />
                                                                         </div>
                                                                         <div class="ml-3.5">
                                                                             <a class="whitespace-nowrap font-medium" href="">
-                                                                                {{ $user['name'] }}
+                                                                                {{ $restaurant['title'] }}
                                                                             </a>
                                                                             <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                                                                {{ $user['email'] }}
+                                                                                {{ $restaurant['email'] }}
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </x-base.table.td>
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                                                     <a class="whitespace-nowrap font-medium" href="">
-                                                                        {{ $user['user_type'] }}
+                                                                        {{ $restaurant['type'] }}
                                                                     </a>
                                                                    
                                                                 </x-base.table.td>
@@ -224,16 +224,12 @@
                                                                     </div>
                                                                 </x-base.table.td>
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                                                    @if($user['status']=='active') @php $status='text-success' @endphp @elseif($user['status']=='inactive') @php $status='text-danger' @endphp @elseif($user['status']=='pending') @php $status='text-warning' @endphp  @endif
-                                                                    <div @class([
-                                                                        'flex items-center justify-center',
-                                                                        $status
-                                                                    ])>
+                                                                    
                                                                         <x-base.lucide class="h-3.5 w-3.5 stroke-[1.7]" icon="Database" />
                                                                         <div class="ml-1.5 whitespace-nowrap">
-                                                                            {{ $user['status'] }}
+                                                                            {{ $restaurant['status'] }}
                                                                         </div>
-                                                                    </div>
+                                                                  
                                                                 </x-base.table.td>
                                                                 <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                                                     <div class="whitespace-nowrap">
@@ -248,14 +244,16 @@
                                                                                     icon="MoreVertical" />
                                                                             </x-base.menu.button>
                                                                             <x-base.menu.items class="w-40">
-                                                                                <x-base.menu.item href="{{route('super.admin.users.edit', $user->id)}}">
-                                                                                    <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
+                                                                                <x-base.menu.item href="{{route('restaurant.owner.restaurants.edit', $restaurant->uid)}}">
+                                                                                    {{-- <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" /> --}}
                                                                                     Edit
                                                                                 </x-base.menu.item>
-                                                                                <x-base.menu.item class="text-danger">
-                                                                                    <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" />
-                                                                                    Delete
-                                                                                </x-base.menu.item>
+                                                                                <form method="POST" action="{{route('restaurant.owner.restaurants.destroy', $restaurant->uid)}}">
+                                                                                    @csrf
+                                                                                    @method('delete')
+                                                                                    {{-- <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" /> --}}
+                                                                                <x-base.form-input class="cursor-pointer flex items-center p-2 transition duration-300 ease-in-out rounded-md hover:bg-slate-200/60 dark:bg-darkmode-600 dark:hover:bg-darkmode-400 dropdown-item text-danger" type="submit" value=Delete />
+                                                                            </form>
                                                                             </x-base.menu.items>
                                                                         </x-base.menu>
                                                                     </div>

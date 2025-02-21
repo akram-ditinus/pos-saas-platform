@@ -19,7 +19,7 @@ class RestaurantOwnerMenu
             // ],
             [
                 'icon' => "UserSquare",
-                'route_name' => "#",
+                'route_name' => "restaurant.owner.restaurants.index",
                 'params' => [],
                 'title' => "My Restaurants",
             ],
