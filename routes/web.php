@@ -107,8 +107,13 @@ include('auth.php');
 /** Super Admin Routes */
 Route::group(['prefix'=> 'super-admin','as'=>'super.admin.','middleware'=>['auth','not.super.admin']], function () {
     Route::get('dashboard', [\App\Http\Controllers\SuperAdmin\DashboardController::class,'dashboard'])->name('dashboard');
+
     Route::resource('users',\App\Http\Controllers\SuperAdmin\UserController::class);
     Route::resource('subscriptions',\App\Http\Controllers\SuperAdmin\SubscriptionController::class);
+    Route::resource('restaurants',\App\Http\Controllers\SuperAdmin\RestaurantController::class);
+
+    Route::post('restaurant.update.status',[\App\Http\Controllers\SuperAdmin\RestaurantController::class,'restaurantUpdateStatus'])->name('restaurant.update.status');
+    
     Route::get('profile', [\App\Http\Controllers\SuperAdmin\UserController::class,'profile'])->name('profile');
     Route::patch('update-profile-image', [\App\Http\Controllers\SuperAdmin\UserController::class,'updateProfileImage'])->name('update.profile.image');
     Route::patch('profile', [App\Http\Controllers\SuperAdmin\UserController::class,'update'])->name('profile');
@@ -117,7 +122,10 @@ Route::group(['prefix'=> 'super-admin','as'=>'super.admin.','middleware'=>['auth
 
 /** Resturant Owner Routes */
 Route::group(['prefix'=> 'restaurant-owner','as'=>'restaurant.owner.','middleware'=> ['auth']], function () {
+    Route::resource('restaurants',\App\Http\Controllers\RestaurantOwner\RestaurantController::class);
+    
     Route::get('dashboard', [\App\Http\Controllers\RestaurantOwner\DashboardController::class,'dashboard'])->name('dashboard');
+    
     Route::get('profile', [\App\Http\Controllers\RestaurantOwner\UserController::class,'profile'])->name('profile');
     Route::patch('profile', [App\Http\Controllers\RestaurantOwner\UserController::class,'update'])->name('profile');
     Route::patch('update-profile-image', [\App\Http\Controllers\RestaurantOwner\UserController::class,'updateProfileImage'])->name('update.profile.image');

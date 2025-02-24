@@ -13,14 +13,7 @@
                 <div class="text-base font-medium group-[.mode--light]:text-white">
                     Users
                 </div>
-                <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
-                    <x-base.menu.item
-                        class="group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
-                        variant="primary" href="{{route('super.admin.users.create')}}">
-                        <x-base.lucide class="mr-2 h-4 w-4 stroke-[1.3]" icon="PenLine" />
-                        Add New User
-                    </x-base.menu.item>
-                </div>
+
             </div>
             <div class="mt-3.5 flex flex-col gap-8">
                 <div class="box box--stacked flex flex-col p-5">
@@ -30,7 +23,7 @@
                             <div class="text-base text-slate-500">Registered Users</div>
                             <div class="mt-1.5 text-2xl font-medium">20</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                                
+
                             </div>
                         </div>
                         <div
@@ -38,7 +31,7 @@
                             <div class="text-base text-slate-500">Active Users</div>
                             <div class="mt-1.5 text-2xl font-medium">18</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                               
+
                             </div>
                         </div>
                         <div
@@ -46,7 +39,7 @@
                             <div class="text-base text-slate-500">New Users</div>
                             <div class="font-mediumm mt-1.5 text-2xl">2</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                               
+
                             </div>
                         </div>
                         <div
@@ -54,7 +47,7 @@
                             <div class="text-base text-slate-500">Login Activity</div>
                             <div class="font-mediumm mt-1.5 text-2xl">5</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-                               
+
                             </div>
                         </div>
                     </div>
@@ -125,13 +118,13 @@
                                             <div class="text-left text-slate-500">
                                                 Position
                                             </div>
-                                           
+
                                         </div>
                                         <div class="mt-3">
                                             <div class="text-left text-slate-500">
                                                 Department
                                             </div>
-                                            
+
                                         </div>
                                         <div class="mt-4 flex items-center">
                                             <x-base.button class="ml-auto w-32" variant="secondary">
@@ -162,17 +155,14 @@
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
                                         Type
                                     </x-base.table.td>
-                                    <x-base.table.td
-                                        class="w-52 border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                        Profile Completeness
-                                    </x-base.table.td>
+
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                         Status
                                     </x-base.table.td>
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                        Joined Date
+                                        Address
                                     </x-base.table.td>
                                     <x-base.table.td
                                         class="w-20 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
@@ -181,86 +171,78 @@
                                 </x-base.table.tr>
                             </x-base.table.thead>
                             <x-base.table.tbody>
-                                @foreach ($allUsers as $Key => $user)
-                                                            <x-base.table.tr class="[&_td]:last:border-b-0">
-                                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                                                    <x-base.form-check.input type="checkbox" />
-                                                                </x-base.table.td>
-                                                                <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
-                                                                    <div class="flex items-center">
-                                                                        <div class="image-fit zoom-in h-9 w-9">
-                                                                            <x-base.tippy
-                                                                                class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
-                                                                                src="{{-- Vite::asset($user['photo']) --}}" alt="POS System" as="img"
-                                                                                content="{{ $user['name'] }}" />
-                                                                        </div>
-                                                                        <div class="ml-3.5">
-                                                                            <a class="whitespace-nowrap font-medium" href="">
-                                                                                {{ $user['name'] }}
-                                                                            </a>
-                                                                            <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                                                                {{ $user['email'] }}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </x-base.table.td>
-                                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                                                    <a class="whitespace-nowrap font-medium" href="">
-                                                                        {{ $user['user_type'] }}
-                                                                    </a>
-                                                                   
-                                                                </x-base.table.td>
-                                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                                                    <div class="w-40">
-                                                                        <div class="text-xs text-slate-500">
-                                                                            {{ mt_rand(50, 100) }}%
-                                                                        </div>
-                                                                        <div class="mt-1.5 flex h-1 rounded-sm border bg-slate-50">
-                                                                            <div @class(array: [
-                                                                                'first:rounded-l-sm last:rounded-r-sm border border-primary/20 -m-px bg-primary/40',
-                                                                                ['w-[35%]', 'w-[45%]', 'w-[55%]', 'w-[65%]', 'w-[75%]'][mt_rand(0, 4)],
-                                                                            ])></div>
-                                                                        </div>
-                                                                    </div>
-                                                                </x-base.table.td>
-                                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                                                    @if($user['status']=='active') @php $status='text-success' @endphp @elseif($user['status']=='inactive') @php $status='text-danger' @endphp @elseif($user['status']=='pending') @php $status='text-warning' @endphp  @endif
-                                                                    <div @class([
-                                                                        'flex items-center justify-center',
-                                                                        $status
-                                                                    ])>
-                                                                        <x-base.lucide class="h-3.5 w-3.5 stroke-[1.7]" icon="Database" />
-                                                                        <div class="ml-1.5 whitespace-nowrap">
-                                                                            {{ $user['status'] }}
-                                                                        </div>
-                                                                    </div>
-                                                                </x-base.table.td>
-                                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                                                    <div class="whitespace-nowrap">
-                                                                        joinedDate 
-                                                                    </div>
-                                                                </x-base.table.td>
-                                                                <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
-                                                                    <div class="flex items-center justify-center">
-                                                                        <x-base.menu class="h-5">
-                                                                            <x-base.menu.button class="h-5 w-5 text-slate-500">
-                                                                                <x-base.lucide class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
-                                                                                    icon="MoreVertical" />
-                                                                            </x-base.menu.button>
-                                                                            <x-base.menu.items class="w-40">
-                                                                                <x-base.menu.item href="{{route('super.admin.users.edit', $user->id)}}">
-                                                                                    <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
-                                                                                    Edit
-                                                                                </x-base.menu.item>
-                                                                                <x-base.menu.item class="text-danger">
-                                                                                    <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" />
-                                                                                    Delete
-                                                                                </x-base.menu.item>
-                                                                            </x-base.menu.items>
-                                                                        </x-base.menu>
-                                                                    </div>
-                                                                </x-base.table.td>
-                                                            </x-base.table.tr>
+                                @foreach ($restaurants as $Key => $restaurant)
+                                    <x-base.table.tr class="[&_td]:last:border-b-0">
+                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                            <x-base.form-check.input type="checkbox" />
+                                        </x-base.table.td>
+                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
+                                            <div class="flex items-center">
+                                                <div class="image-fit zoom-in h-9 w-9">
+                                                    <x-base.tippy
+                                                        class="rounded-full shadow-[0px_0px_0px_2px_#fff,_1px_1px_5px_rgba(0,0,0,0.32)] dark:shadow-[0px_0px_0px_2px_#3f4865,_1px_1px_5px_rgba(0,0,0,0.32)]"
+                                                        src="{{asset($restaurant->logo)}}" alt="POS System" as="img"
+                                                        content="{{ $restaurant['title'] }}" />
+                                                </div>
+                                                <div class="ml-3.5">
+                                                    <a class="whitespace-nowrap font-medium" href="">
+                                                        {{ $restaurant['title'] }}
+                                                    </a>
+                                                    <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
+                                                        {{ $restaurant['email'] }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </x-base.table.td>
+                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                            <a class="whitespace-nowrap font-medium" href="">
+                                                {{ $restaurant['type'] }}
+                                            </a>
+
+                                        </x-base.table.td>
+
+                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+
+
+                                            <div class="ml-1.5 whitespace-nowrap">
+                                                
+                                                <x-base.form-select id="status">
+                                                    <option value="draft" @if($restaurant['status']=='draft') selected @endif>Pending</option>
+                                                    <option value="active" @if($restaurant['status']=='active') selected @endif>Active</option>
+                                                    <option value="block" @if($restaurant['status']=='block') selected @endif>block</option>
+                                                </x-base.form-select>
+                                            </div>
+
+                                        </x-base.table.td>
+                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                            <div class="whitespace-nowrap">
+                                                {{$restaurant->city}} - {{$restaurant->state}}@if(!empty($countries[$restaurant->country_id])), {{$countries[$restaurant->country_id]}} @endif
+                                            </div>
+                                        </x-base.table.td>
+                                        <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
+                                            <div class="flex items-center justify-center">
+                                                <x-base.menu class="h-5">
+                                                    <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                                        <x-base.lucide class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                            icon="MoreVertical" />
+                                                    </x-base.menu.button>
+                                                    <x-base.menu.items class="w-40">
+                                                        <x-base.menu.item
+                                                            href="{{route('super.admin.restaurants.show', $restaurant->uid)}}">
+                                                            <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
+                                                            More
+                                                        </x-base.menu.item>
+                                                        <x-base.menu.item
+                                                            href="{{route('super.admin.restaurants.edit', $restaurant->uid)}}">
+                                                            <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
+                                                            Edit
+                                                        </x-base.menu.item>
+
+                                                    </x-base.menu.items>
+                                                </x-base.menu>
+                                            </div>
+                                        </x-base.table.td>
+                                    </x-base.table.tr>
                                 @endforeach
                             </x-base.table.tbody>
                         </x-base.table>
@@ -297,3 +279,32 @@
         </div>
     </div>
 @endsection
+{{-- @push('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $('#status').on('change',function() {
+            console.log($('#status').val());
+          
+         
+            $.ajax({
+                url: "{{route('super.admin.restaurant.update.status')}}",
+                type: 'POST',
+                data: { status: $('#status').val() , '_token': "{{ csrf_token() }}" } ,
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (response) {
+                    // $('#email').val(response.email);
+                    // $('#invoice_to_phone').val(response.phone);
+                    // $('#invoice_to_address').val(response.address);
+                    // $('#suggested_name').text(response.name);
+                },
+
+                error: function () {
+                    console.log("error in fetching user info");
+                }
+            }); 
+        });
+    });
+    
+</script>
+@endpush --}}

@@ -27,6 +27,11 @@ class SuperAdminMenu
                 'route_name' => "super.admin.users.index",
                 'params' => [],
                 'title' => "Restaurant Owners",
+            ],[
+                'icon' => "UserSquare",
+                'route_name' => "super.admin.restaurants.index",
+                'params' => [],
+                'title' => "Restaurants",
             ],
             
             // [
