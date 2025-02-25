@@ -73,9 +73,8 @@
                 </div>
             </div>
             <div class="mt-7">
-                <form method="POST" action="{{route('restaurant.owner.restaurants.update',$restaurant->uid)}}">
+                <form method="POST" action="{{route('restaurant.owner.restaurants.store')}}" enctype="multipart/form-data">
                     @csrf
-                    @method('patch');
                     <div class="box box--stacked flex flex-col">
                         <div class="p-7">
                             <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
@@ -90,23 +89,19 @@
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <img id="blah" src="#" alt="your image" />
                                     <div class="flex items-center">
-                                        <div
-                                            class="relative flex h-24 w-24 items-center justify-center rounded-full border border-primary/10 bg-primary/5">
-                                            <x-base.lucide
-                                                class="-mt-1.5 h-[65%] w-[65%] fill-slate-300/70 stroke-slate-400/50 stroke-[0.5]"
-                                                icon="User" />
-                                            <a class="box absolute bottom-0 right-0 flex h-7 w-7 items-center justify-center rounded-full"
-                                                href="">
-                                                <x-base.lucide class="h-3.5 w-3.5 stroke-[1.3] text-slate-500"
-                                                    icon="Pencil" />
-                                            </a>
-                                        </div>
-                                        <x-base.button class="ml-8 mr-2 h-8 pl-3.5 pr-4" variant="outline-secondary"
-                                            size="sm">
-                                            <x-base.lucide class="mr-1.5 h-3.5 w-3.5 stroke-[1.3]" icon="Trash2" />
-                                            Remove
-                                        </x-base.button>
+                                        <x-base.input-group>
+                                            <x-base.form-input type="file" value="{{ old('logo') }}" name='logo'  accept="image/*" type='file' id="imgInp" />
+                                            </x-base.input-group>
+                                            @error('logo')
+                                            <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
+                                                {{ $message }}
+                                                <x-base.alert.dismiss-button class="btn-close" type="button" aria-label="Close">
+                                                    <x-base.lucide class="h-4 w-4" icon="X" />
+                                                </x-base.alert.dismiss-button>
+                                            </x-base.alert>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +121,7 @@
                                     <div class="flex flex-col items-center md:flex-row">
                                         <x-base.form-input
                                             class="first:rounded-b-none last:-mt-px last:rounded-t-none focus:z-10 first:md:rounded-r-none first:md:rounded-bl-md last:md:-ml-px last:md:mt-0 last:md:rounded-l-none last:md:rounded-tr-md [&:not(:first-child):not(:last-child)]:-mt-px [&:not(:first-child):not(:last-child)]:rounded-none [&:not(:first-child):not(:last-child)]:md:-ml-px [&:not(:first-child):not(:last-child)]:md:mt-0"
-                                            type="text" name="title" value="{{ old('title',$restaurant['title'])}}" />
+                                            type="text" name="title" value="{{ old('title')}}" />
                                     </div>
                                     @error('title')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
@@ -139,7 +134,31 @@
                                 </div>
                             </div>
 
-                            
+                            <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
+                                <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
+                                    <div class="text-left">
+                                        <div class="flex items-center">
+                                            <div class="font-medium">Email</div>
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                                Required
+                                            </div>
+                                        </div>
+                                      
+                                    </div>
+                                </label>
+                                <div class="mt-3 w-full flex-1 xl:mt-0">
+                                    <x-base.form-input type="text" value="{{ old('email') }}" name='email' />
+                                    @error('email')
+                                        <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
+                                            {{ $message }}
+                                            <x-base.alert.dismiss-button class="btn-close" type="button" aria-label="Close">
+                                                <x-base.lucide class="h-4 w-4" icon="X" />
+                                            </x-base.alert.dismiss-button>
+                                        </x-base.alert>
+                                    @enderror
+                                </div>
+                            </div>
 
                             <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
                                 <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
@@ -150,7 +169,7 @@
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-input type="text" value="{{ old('phone',$restaurant['phone']) }}" name='phone' />
+                                    <x-base.form-input type="text" value="{{ old('phone') }}" name='phone' />
                                     @error('phone')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
                                             {{ $message }}
@@ -172,9 +191,9 @@
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
                                     <x-base.form-select name="type">
-                                        <option value="dine-in" @if($restaurant['type']=='dine-in') selected @endif>Dine In</option>
-                                        <option value="take-away" @if($restaurant['type']=='take-away') selected @endif>Take Away</option>
-                                        <option value="both" @if($restaurant['type']=='both') selected @endif>Both</option>
+                                        <option value="dine-in">Dine In</option>
+                                        <option value="take-away">Take Away</option>
+                                        <option value="boty">Both</option>
                                     </x-base.form-select>
                                 </div>
                             </div>
@@ -183,14 +202,14 @@
                                 <label class="mb-2 inline-block sm:mb-0 sm:mr-5 sm:text-right xl:mr-14 xl:w-60">
                                     <div class="text-left">
                                         <div class="flex items-center">
-                                            <div class="font-medium">Currency</div>
+                                            <div class="font-medium">Restaurant Type</div>
                                         </div>
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
                                     <x-base.form-select name="currency">
                                         @foreach($currencies as $currency)
-                                            <option value="{{$currency->uid}}" @if($restaurant['currency']==$currency->uid) selected @endif> {{$currency->title}}</option>
+                                            <option value="{{$currency->uid}}"> {{$currency->title}}</option>
                                         @endforeach
                                     </x-base.form-select>
                                 </div>
@@ -210,7 +229,7 @@
                                 </label>
 
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-input type="text" value="{{ old('address_line_1',$restaurant['address_line_1']) }}" name='address_line_1'
+                                    <x-base.form-input type="text" value="{{ old('address_line_1') }}" name='address_line_1'
                                         required="required" />
                                     @error('address_line_1')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
@@ -232,7 +251,7 @@
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-input type="text" value="{{ old('address_line_2',$restaurant['address_line_2']) }}"
+                                    <x-base.form-input type="text" value="{{ old('address_line_2') }}"
                                         name='address_line_2' />
                                     @error('address_line_2')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
@@ -242,8 +261,8 @@
                                             </x-base.alert.dismiss-button>
                                         </x-base.alert>
                                     @enderror
-                                    <x-base.form-input type="hidden" value="{{ old('longitude',$restaurant['longitude']) }}" name='longitude' />
-                                    <x-base.form-input type="hidden" value="{{ old('latitude',$restaurant['latitude']) }}" name='latitude' />
+                                    <x-base.form-input type="hidden" value="{{ old('longitude', '28.632425') }}" name='longitude' />
+                                    <x-base.form-input type="hidden" value="{{ old('latitude', '77.218791') }}" name='latitude' />
                                 </div>
                             </div>
 
@@ -260,7 +279,7 @@
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-input type="text" value="{{ old('state',$restaurant['state']) }}" name='state'
+                                    <x-base.form-input type="text" value="{{ old('state') }}" name='state'
                                         required="required" />
                                     @error('state')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
@@ -286,7 +305,7 @@
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-input type="text" value="{{ old('city',$restaurant['city']) }}" name='city'
+                                    <x-base.form-input type="text" value="{{ old('city') }}" name='city'
                                         required="required" />
                                     @error('city')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
@@ -308,7 +327,7 @@
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-input type="text" value="{{ old('pincode',$restaurant['pincode']) }}" name='pincode' />
+                                    <x-base.form-input type="text" value="{{ old('pincode') }}" name='pincode' />
                                     @error('pincode')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
                                             {{ $message }}
@@ -325,7 +344,8 @@
                                     <div class="text-left">
                                         <div class="flex items-center">
                                             <div class="font-medium">Country</div>
-                                            <div class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
+                                            <div
+                                                class="ml-2.5 rounded-md border border-slate-200 bg-slate-100 px-2 py-0.5 text-xs text-slate-500 dark:bg-darkmode-300 dark:text-slate-400">
                                                 Required
                                             </div>
                                         </div>
@@ -335,8 +355,8 @@
                                     <x-base.form-select class="w-full" data-placeholder="Select your country"
                                         name="country_id">
                                         @foreach ($countries as $key => $country)
-                                            <option value="{{ $key }}" @if($restaurant['country_id']==$key) selected @endif>
-                                                {{ $country }}
+                                            <option value="{{ $country['dial_code'] }}">
+                                                {{ $country['name'] }}
                                             </option>
                                         @endforeach
                                     </x-base.form-select>
@@ -356,7 +376,7 @@
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-input type="text" value="{{ old('no_of_floors',$restaurant['no_of_floors']) }}" name='no_of_floors'
+                                    <x-base.form-input type="text" value="{{ old('no_of_floors',1) }}" name='no_of_floors'
                                         required="required" />
                                     @error('no_of_floors')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
@@ -378,7 +398,7 @@
                                     </div>
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
-                                    <x-base.form-input type="text" value="{{ old('no_of_tables',$restaurant['no_of_tables']) }}" name='no_of_tables'
+                                    <x-base.form-input type="text" value="{{ old('no_of_tables') }}" name='no_of_tables'
                                         required="required" />
                                     @error('no_of_tables')
                                         <x-base.alert class="mb-2 flex items-center" variant="outline-danger">
@@ -401,8 +421,8 @@
                                 </label>
                                 <div class="mt-3 w-full flex-1 xl:mt-0">
                                     <x-base.form-select name="has_table_booking">
-                                        <option value="no" @if($restaurant['has_table_booking']=='no') selected @endif>No</option>
-                                        <option value="yes" @if($restaurant['has_table_booking']=='yes') selected @endif>Yes</option>
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
                                     </x-base.form-select>
                                 </div>
                             </div>
@@ -417,8 +437,8 @@
                                 </label>
                                  <div class="mt-3 w-full flex-1 xl:mt-0">
                                     <x-base.form-select name="has_online_delivery">
-                                        <option value="no" @if($restaurant['has_online_delivery']=='no') selected @endif>No</option>
-                                        <option value="yes" @if($restaurant['has_online_delivery']=='yes') selected @endif>Yes</option>
+                                        <option value="no">No</option>
+                                        <option value="yes">Yes</option>
                                     </x-base.form-select>
                                 </div>
                             </div>
@@ -436,3 +456,18 @@
     </div>
     </div>
 @endsection
+@push('scripts')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        $('#blah').hide();
+    });
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+            $('#blah').show();
+            blah.src = URL.createObjectURL(file)
+        }
+    }
+</script>
+@endpush

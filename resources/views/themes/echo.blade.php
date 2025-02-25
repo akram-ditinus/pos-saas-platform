@@ -401,12 +401,15 @@
 @pushOnce('styles')
     @vite('resources/css/vendors/simplebar.css')
     @vite('resources/css/themes/echo.css')
+    @vite('resources/css/vendors/toastify.css')
 @endPushOnce
 
 @pushOnce('vendors')
     @vite('resources/js/vendors/simplebar.js')
 @endPushOnce
 
-@pushOnce('scripts')
+@push('scripts')
     @vite('resources/js/themes/echo.js')
-@endPushOnce
+    @vite('resources/js/jquery.min.js')
+    @vite('resources/js/vendors/toastify.js')
+@endPush

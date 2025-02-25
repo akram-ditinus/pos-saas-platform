@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('uid')->unique();
             $table->string('title');
+            $table->string('code');
             $table->string('type')->comment('percentage,fix');
             $table->string('amount',8.2)->default(0.00);
             $table->string('status')->default('active')->comment('active,inactive');

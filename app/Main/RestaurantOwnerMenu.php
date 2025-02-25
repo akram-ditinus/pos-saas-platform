@@ -19,10 +19,16 @@ class RestaurantOwnerMenu
             // ],
             [
                 'icon' => "UserSquare",
+                'route_name' => "restaurant.owner.subscriptions.index",
+                'params' => [],
+                'title' => "Subscriptions",
+            ],[
+                'icon' => "UserSquare",
                 'route_name' => "restaurant.owner.restaurants.index",
                 'params' => [],
                 'title' => "My Restaurants",
             ],
+            
             // [
             //     'icon' => "ActivitySquare",
             //     'route_name' => "dashboard-overview-2",

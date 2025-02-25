@@ -16,40 +16,37 @@
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <x-base.menu.item
                         class="group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
-                        variant="primary" href="{{route('super.admin.subscriptions.create')}}">
+                        variant="primary" href="{{route('super.admin.taxes.create')}}">
                         <x-base.lucide class="mr-2 h-4 w-4 stroke-[1.3]" icon="PenLine" />
-                        Add New Subscription
+                        Add New Tax
                     </x-base.menu.item>
                 </div>
             </div>
             <div class="mt-3.5 flex flex-col gap-8">
                 <div class="box box--stacked flex flex-col p-5">
                     <div class="grid grid-cols-3 gap-5">
-                        <div
-                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                        <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                             <div class="text-base text-slate-500">All Subscriptions</div>
                             <div class="mt-1.5 text-2xl font-medium">2</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-
+                                
                             </div>
                         </div>
-                        <div
-                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                        <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                             <div class="text-base text-slate-500">Active Subscriptions</div>
                             <div class="mt-1.5 text-2xl font-medium">1</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-
+                                
                             </div>
                         </div>
-                        <div
-                            class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
+                        <div class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
                             <div class="text-base text-slate-500">Inactive Subscriptions</div>
                             <div class="font-mediumm mt-1.5 text-2xl">0</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
-
+                                
                             </div>
                         </div>
-
+                       
                     </div>
                 </div>
                 @if (session('error'))
@@ -153,18 +150,14 @@
                                     </x-base.table.td>
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                        Number of days
+                                        Percentage
                                     </x-base.table.td>
-
-                                    <x-base.table.td
-                                        class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                        Trial period in days
-                                    </x-base.table.td>
-
+                                    
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                         Status
                                     </x-base.table.td>
+                                   
                                     <x-base.table.td
                                         class="w-20 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                         Action
@@ -172,57 +165,55 @@
                                 </x-base.table.tr>
                             </x-base.table.thead>
                             <x-base.table.tbody>
-                                @foreach ($allSubscriptions as $Key => $subscription)
-                                    <x-base.table.tr class="[&_td]:last:border-b-0">
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            <x-base.form-check.input type="checkbox" />
-                                        </x-base.table.td>
-                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
-                                            {{ $subscription['title'] }}
+                                @foreach ($taxes as $Key => $tax)
+                                                            <x-base.table.tr class="[&_td]:last:border-b-0">
+                                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                                    <x-base.form-check.input type="checkbox" />
+                                                                </x-base.table.td>
+                                                                <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
+                                                                    <div class="flex items-center">
+                                                                       
+                                                                        <div class="ml-3.5">
+                                                                           
+                                                                                {{ $tax['title'] }}
+                                                                           
+                                                                           
+                                                                        </div>
+                                                                    </div>
+                                                                </x-base.table.td>
+                                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                                        {{ $tax['percentage'] }}
 
-                                            <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                                Price (Sale Price)<br>
-                                                {{ $subscription['price']}} ({{$subscription['sale_price']}})
-                                            </div>
-
-                                        </x-base.table.td>
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            {{ $subscription['duration_in_days'] }}
-
-                                        </x-base.table.td>
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            {{ $subscription['trial_period_in_days'] }}
-
-
-                                        </x-base.table.td>
-
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            {{$subscription['status']}}
-
-                                        </x-base.table.td>
-
-                                        <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
-                                            <div class="flex items-center justify-center">
-                                                <x-base.menu class="h-5">
-                                                    <x-base.menu.button class="h-5 w-5 text-slate-500">
-                                                        <x-base.lucide class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
-                                                            icon="MoreVertical" />
-                                                    </x-base.menu.button>
-                                                    <x-base.menu.items class="w-40">
-                                                        <x-base.menu.item
-                                                            href="{{route('super.admin.subscriptions.edit', $subscription->uid)}}">
-                                                            <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
-                                                            Edit
-                                                        </x-base.menu.item>
-                                                        <x-base.menu.item class="text-danger">
-                                                            <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" />
-                                                            Delete
-                                                        </x-base.menu.item>
-                                                    </x-base.menu.items>
-                                                </x-base.menu>
-                                            </div>
-                                        </x-base.table.td>
-                                    </x-base.table.tr>
+                                                                </x-base.table.td>
+                                                                
+                                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                                    {{$tax['status']}}
+                                                                        </div>
+                                                                    </div>
+                                                                </x-base.table.td>
+                                                                
+                                                                <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
+                                                                    <div class="flex items-center justify-center">
+                                                                        <x-base.menu class="h-5">
+                                                                            <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                                                                <x-base.lucide class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
+                                                                                    icon="MoreVertical" />
+                                                                            </x-base.menu.button>
+                                                                            <x-base.menu.items class="w-40">
+                                                                                <x-base.menu.item
+                                                                                    href="{{route('super.admin.taxes.edit', $tax->uid)}}">
+                                                                                    <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
+                                                                                    Edit
+                                                                                </x-base.menu.item>
+                                                                                <x-base.menu.item class="text-danger">
+                                                                                    <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" />
+                                                                                    Delete
+                                                                                </x-base.menu.item>
+                                                                            </x-base.menu.items>
+                                                                        </x-base.menu>
+                                                                    </div>
+                                                                </x-base.table.td>
+                                                            </x-base.table.tr>
                                 @endforeach
                             </x-base.table.tbody>
                         </x-base.table>

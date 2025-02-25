@@ -111,6 +111,9 @@ Route::group(['prefix'=> 'super-admin','as'=>'super.admin.','middleware'=>['auth
     Route::resource('users',\App\Http\Controllers\SuperAdmin\UserController::class);
     Route::resource('subscriptions',\App\Http\Controllers\SuperAdmin\SubscriptionController::class);
     Route::resource('restaurants',\App\Http\Controllers\SuperAdmin\RestaurantController::class);
+    Route::resource('taxes',\App\Http\Controllers\SuperAdmin\TaxController::class);
+    Route::resource('coupons',\App\Http\Controllers\SuperAdmin\CouponController::class);
+    Route::resource('settings',\App\Http\Controllers\SuperAdmin\SettingController::class);
 
     Route::post('restaurant.update.status',[\App\Http\Controllers\SuperAdmin\RestaurantController::class,'restaurantUpdateStatus'])->name('restaurant.update.status');
     
@@ -123,7 +126,8 @@ Route::group(['prefix'=> 'super-admin','as'=>'super.admin.','middleware'=>['auth
 /** Resturant Owner Routes */
 Route::group(['prefix'=> 'restaurant-owner','as'=>'restaurant.owner.','middleware'=> ['auth']], function () {
     Route::resource('restaurants',\App\Http\Controllers\RestaurantOwner\RestaurantController::class);
-    
+    Route::resource('subscriptions', \App\Http\Controllers\RestaurantOwner\SubscriptionController::class);
+
     Route::get('dashboard', [\App\Http\Controllers\RestaurantOwner\DashboardController::class,'dashboard'])->name('dashboard');
     
     Route::get('profile', [\App\Http\Controllers\RestaurantOwner\UserController::class,'profile'])->name('profile');

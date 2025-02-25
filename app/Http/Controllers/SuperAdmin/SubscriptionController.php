@@ -40,6 +40,7 @@ class SubscriptionController extends Controller
         $subscription->uid=getRandomCharactor(12,'SubscriptionPlan'); 
         //dd($subscription->uid);
         $subscription->title = $request->title;
+        $subscription->description = $request->description;
         $subscription->price = $request->price;
         $subscription->sale_price = $request->sale_price;
         $subscription->trial_period_in_days = $request->trial_period_in_days;
@@ -75,9 +76,9 @@ class SubscriptionController extends Controller
     
 
         $subscription = \App\Models\SubscriptionPlan::where('uid',$id)->first();
-        // $subscription->uid=getRandomCharactor(12,'SubscriptionPlan'); 
-        // dd($subscription->uid);
+
         $subscription->title = $request->title;
+        $subscription->description = $request->description;
         $subscription->price = $request->price;
         $subscription->sale_price = $request->sale_price;
         $subscription->trial_period_in_days = $request->trial_period_in_days;
@@ -85,8 +86,6 @@ class SubscriptionController extends Controller
         $subscription->remarks = $request->remarks;
         $subscription->status = $request->status;
         
-        // dump($subscription);
-        // dd($request->all());
         $subscription->save();
         return redirect()->route('super.admin.subscriptions.index')->with("success", "Subscription updated successfully");
     }

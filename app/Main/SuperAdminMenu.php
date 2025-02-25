@@ -32,6 +32,21 @@ class SuperAdminMenu
                 'route_name' => "super.admin.restaurants.index",
                 'params' => [],
                 'title' => "Restaurants",
+            ],[
+                'icon' => "UserSquare",
+                'route_name' => "super.admin.taxes.index",
+                'params' => [],
+                'title' => "Taxes",
+            ],[
+                'icon' => "UserSquare",
+                'route_name' => "super.admin.coupons.index",
+                'params' => [],
+                'title' => "Coupons",
+            ],[
+                'icon' => "UserSquare",
+                'route_name' => "super.admin.settings.index",
+                'params' => [],
+                'title' => "Settings",
             ],
             
             // [

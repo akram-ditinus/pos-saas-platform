@@ -198,25 +198,26 @@
                                             <a class="whitespace-nowrap font-medium" href="">
                                                 {{ $restaurant['type'] }}
                                             </a>
-
                                         </x-base.table.td>
-
                                         <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-
-
                                             <div class="ml-1.5 whitespace-nowrap">
-                                                
-                                                <x-base.form-select id="status">
-                                                    <option value="draft" @if($restaurant['status']=='draft') selected @endif>Pending</option>
-                                                    <option value="active" @if($restaurant['status']=='active') selected @endif>Active</option>
-                                                    <option value="block" @if($restaurant['status']=='block') selected @endif>block</option>
+                                                <x-base.form-select onchange="changeStatus('{{$restaurant->uid}}')"
+                                                    id="select{{$restaurant['uid']}}">
+                                                    <option value="draft" @if($restaurant['status'] == 'draft') selected @endif>
+                                                        Pending</option>
+                                                    <option value="active" @if($restaurant['status'] == 'active') selected @endif>
+                                                        Active</option>
+                                                    <option value="block" @if($restaurant['status'] == 'block') selected @endif>
+                                                        block</option>
                                                 </x-base.form-select>
                                             </div>
 
                                         </x-base.table.td>
                                         <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                             <div class="whitespace-nowrap">
-                                                {{$restaurant->city}} - {{$restaurant->state}}@if(!empty($countries[$restaurant->country_id])), {{$countries[$restaurant->country_id]}} @endif
+                                                {{$restaurant->city}} -
+                                                {{$restaurant->state}}@if(!empty($countries[$restaurant->country_id])),
+                                                {{$countries[$restaurant->country_id]}} @endif
                                             </div>
                                         </x-base.table.td>
                                         <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
@@ -278,33 +279,59 @@
             </div>
         </div>
     </div>
+
+    {{-- Toastify Content --}}
+    <div class="text-center">
+        <!-- BEGIN: Notification Content -->
+        <div id="success-notification-content"
+            class="py-5 pl-5 pr-14 bg-white border border-slate-200/60 rounded-lg shadow-xl dark:bg-darkmode-600 dark:text-slate-300 dark:border-darkmode-600 hidden flex flex flex">
+            <i data-tw-merge data-lucide="check-circle" width="24" height="24"
+                class="stroke-[1] w-5 h-5 text-success text-success"></i>
+            <div class="ml-4 mr-4">
+                <div class="font-medium" id="toast-title">Status Saved!</div>
+                <div class="mt-1 text-slate-500" id="toast-body">
+                    Status is changed successfully
+                </div>
+            </div>
+        </div>
+        <!-- END: Notification Content -->
+    </div>
+    {{-- end: Toastify Content --}}
+
+
 @endsection
-{{-- @push('scripts')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function(){
-        $('#status').on('change',function() {
-            console.log($('#status').val());
-          
-         
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        function changeStatus(uid) {
+            console.log($('#select' + uid).val());
+
+            $('#toast-body').text('Status changed successfully to ' + $('#select' + uid).val());
             $.ajax({
                 url: "{{route('super.admin.restaurant.update.status')}}",
                 type: 'POST',
-                data: { status: $('#status').val() , '_token': "{{ csrf_token() }}" } ,
+                data: { status: $('#select' + uid).val(), id: uid, '_token': "{{ csrf_token() }}" },
                 contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                 success: function (response) {
-                    // $('#email').val(response.email);
-                    // $('#invoice_to_phone').val(response.phone);
-                    // $('#invoice_to_address').val(response.address);
-                    // $('#suggested_name').text(response.name);
+                    Toastify({
+                        node: $("#success-notification-content")
+                            .clone()
+                            .removeClass("hidden")[0],
+                        duration: 3000,
+                        newWindow: true,
+                        close: true,
+                        gravity: "top",
+                        position: "right",
+                        stopOnFocus: true,
+                    }).showToast();
                 },
 
                 error: function () {
                     console.log("error in fetching user info");
                 }
-            }); 
-        });
-    });
-    
-</script>
-@endpush --}}
+            });
+        }
+
+    </script>
+@endpush

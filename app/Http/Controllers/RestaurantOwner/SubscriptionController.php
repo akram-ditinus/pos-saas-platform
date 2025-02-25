@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\SuperAdmin;
+namespace App\Http\Controllers\RestaurantOwner;
 
+use App\Fakers\Events;
+use App\Fakers\Transactions;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RestaurantController extends Controller
+class SubscriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $restaurants = \App\Models\Restaurant::all();
-        $countries = array_column(getCountriesArray(),'name','dial_code');
-        //dd($countries);
-        return view("super_admin.restaurants.index", compact("restaurants",'countries'));
+        $subscriptions=\App\Models\SubscriptionPlan::where('status','active')->get();
+        
+        return view("restaurant_owner.subscriptions.index",compact("subscriptions"));
     }
 
     /**
@@ -39,11 +40,15 @@ class RestaurantController extends Controller
      */
     public function show(string $id)
     {
-        $currencies = \App\Models\Currency::all();
-        $countries = array_column(getCountriesArray(),'name','dial_code');
-        $restaurant=\App\Models\Restaurant::where('uid',$id)->first();
+        $subscription = \App\Models\SubscriptionPlan::where('uid',$id)->first();
+        if($subscription){
+            //return view('restaurant_owner.subscriptions.show',compact('subscription')); 
+            return view('restaurant_owner.subscriptions.show', [
+            'transactions' => Transactions::fakeTransactions(),
+            'subscription'=> $subscription
+        ]);
+        }
        
-        return view("super_admin.restaurants.show", compact('countries','currencies','restaurant'));
     }
 
     /**
@@ -60,17 +65,6 @@ class RestaurantController extends Controller
     public function update(Request $request, string $id)
     {
         //
-    }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function restaurantUpdateStatus(Request $request)
-    {
-        
-        // "status": "active",
-        // "id": "yobe38pju0x5",
-        \App\Models\Restaurant::where('uid',$request->id)->update(['status'=>$request->status]);
-        
     }
 
     /**
