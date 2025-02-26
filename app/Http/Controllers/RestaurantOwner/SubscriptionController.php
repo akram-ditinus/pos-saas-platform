@@ -40,11 +40,16 @@ class SubscriptionController extends Controller
      */
     public function show(string $id)
     {
-        $subscription = \App\Models\SubscriptionPlan::where('uid',$id)->first();
+
+        $subscription = \App\Models\SubscriptionPlan::with('tax')->where('uid',$id)->first();
+        $subscription->tax_amount =0;
+        $subscription_amount=$subscription->sale_price?$subscription->sale_price:$subscription->price;
         if($subscription){
+            if(!empty($subscription->tax->percentage)){
+                $subscription->tax_amount=($subscription->tax->percentage*$subscription_amount)/100;
+            }
             //return view('restaurant_owner.subscriptions.show',compact('subscription')); 
             return view('restaurant_owner.subscriptions.show', [
-            'transactions' => Transactions::fakeTransactions(),
             'subscription'=> $subscription
         ]);
         }
@@ -74,4 +79,19 @@ class SubscriptionController extends Controller
     {
         //
     }
+
+    /**
+     * Apply coupon in subscription 
+     */
+    public function applyCoupon(Request $request)
+    {
+        $coupon = \App\Models\Coupon::where('code',$request->coupon_code)->first();
+        if(!empty($coupon->amount)){
+            return (['status'=>'success','type'=>$coupon->type,'cpnamt'=>$coupon->amount]);
+        }else{
+            return (['status'=>'error']);
+        }
+    }
+
+
 }

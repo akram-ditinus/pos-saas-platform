@@ -127,10 +127,12 @@ Route::group(['prefix'=> 'super-admin','as'=>'super.admin.','middleware'=>['auth
 Route::group(['prefix'=> 'restaurant-owner','as'=>'restaurant.owner.','middleware'=> ['auth']], function () {
     Route::resource('restaurants',\App\Http\Controllers\RestaurantOwner\RestaurantController::class);
     Route::resource('subscriptions', \App\Http\Controllers\RestaurantOwner\SubscriptionController::class);
-
+    Route::resource('orders', \App\Http\Controllers\RestaurantOwner\OrderController::class);
+    
     Route::get('dashboard', [\App\Http\Controllers\RestaurantOwner\DashboardController::class,'dashboard'])->name('dashboard');
     
     Route::get('profile', [\App\Http\Controllers\RestaurantOwner\UserController::class,'profile'])->name('profile');
     Route::patch('profile', [App\Http\Controllers\RestaurantOwner\UserController::class,'update'])->name('profile');
     Route::patch('update-profile-image', [\App\Http\Controllers\RestaurantOwner\UserController::class,'updateProfileImage'])->name('update.profile.image');
+    Route::post('apply-coupon', [\App\Http\Controllers\RestaurantOwner\SubscriptionController::class,'applyCoupon'])->name('apply.coupon');
 });

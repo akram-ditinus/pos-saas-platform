@@ -4,6 +4,15 @@
     <title>POS System</title>
 @endsection
 
+@push('styles')
+    <style>
+        /* thead tr td{
+
+                background-color: aquamarine !important;
+            } */
+    </style>
+@endpush
+
 @section('subcontent')
     <div class="grid grid-cols-12 gap-x-6 gap-y-10">
         <div class="col-span-12">
@@ -14,18 +23,17 @@
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <x-base.button
                         class="group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
-                        variant="primary"
-                    >
-                        <x-base.lucide
-                            class="mr-3 h-4 w-4 stroke-[1.3]"
-                            icon="ExternalLink"
-                        />
+                        variant="primary">
+                        <x-base.lucide class="mr-3 h-4 w-4 stroke-[1.3]" icon="ExternalLink" />
                         My Profile
                     </x-base.button>
                 </div>
             </div>
             <div class="mt-3.5 grid grid-cols-12 gap-x-6 gap-y-10">
-                <div class="col-span-12 xl:col-span-8">
+                <div class="col-span-12">
+                    <form action="{{route('restaurant.owner.orders.store')}}" method="POST">
+                        @csrf
+                        <x-base.form-input type="hidden" name="subscription_plan_id" value="{{$subscription->uid}}"/>
                     <div class="box box--stacked flex flex-col p-5 sm:p-14">
                         <div
                             class="flex flex-col gap-y-7 rounded-lg border border-primary/5 bg-primary/[0.03] px-8 py-12 sm:-mx-10 sm:-mt-10 sm:px-10 sm:py-16 md:flex-row">
@@ -46,7 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3.5 text-lg font-medium text-slate-600/90">
-                                    Tailwise Pty Ltd.
+                                    Ditinus Technology LTD.
                                 </div>
                             </div>
                             <div class="md:ml-auto md:text-right">
@@ -54,12 +62,12 @@
                                     # INVOICE
                                 </div>
                                 <div class="mt-1">
-                                    {{ $transactions[0]['orderId'] }}
+                                    {{ 121 }}
                                 </div>
                                 <div class="mt-7 flex flex-col gap-1">
-                                    <div>{{ $users[0]['addressLine1'] }}</div>
-                                    <div>{{ $users[0]['addressLine2'] }}</div>
-                                    <div>{{ $users[0]['location'] }}</div>
+                                    <div>address line 1</div>
+                                    <div>addressLine2</div>
+                                    <div>location</div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +80,8 @@
                                 <div class="mt-1.5 flex flex-col gap-1">
                                     <div>{{ auth()->user()->email }}</div>
                                     <div>{{ auth()->user()->phone }}</div>
-                                    <div>{{ auth()->user()->city }},{{ auth()->user()->state }}{{ auth()->user()->landmark}}</div>
+                                    <div>{{ auth()->user()->city }},{{ auth()->user()->state }}{{ auth()->user()->landmark}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="mt-7 flex flex-col gap-4 sm:ml-auto sm:mt-0 sm:text-right">
@@ -85,64 +94,53 @@
                                 <div>
                                     <div class="text-slate-500">Due date :</div>
                                     <div class="mt-1.5 font-medium text-slate-600">
-                                        {{ $transactions[0]['orderDate'] }}
+                                        2-feb-2025
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-10 rounded-[0.6rem] border border-slate-200/80">
                             <div class="overflow-auto xl:overflow-visible">
-                                <x-base.table>
+                                <x-base.table class="text-left">
                                     <x-base.table.thead>
                                         <x-base.table.tr>
                                             <x-base.table.td
-                                                class="border-slate-200/80 bg-slate-50 py-4 font-medium text-slate-500 first:rounded-tl-[0.6rem] last:rounded-tr-[0.6rem]"
-                                            >
-                                                Item
+                                                class="border-slate-200/80 bg-slate-50 py-4 font-medium text-slate-500 first:rounded-tl-[0.6rem] last:rounded-tr-[0.6rem]">
+                                                Subscription Name
                                             </x-base.table.td>
                                             <x-base.table.td
-                                                class="border-slate-200/80 bg-slate-50 py-4 text-right font-medium text-slate-500 first:rounded-tl-[0.6rem] last:rounded-tr-[0.6rem]"
-                                            >
-                                                Quantity
+                                                class="border-slate-200/80 bg-slate-50 py-4 font-medium text-slate-500 first:rounded-tl-[0.6rem] last:rounded-tr-[0.6rem]">
+                                                Validity
                                             </x-base.table.td>
                                             <x-base.table.td
-                                                class="border-slate-200/80 bg-slate-50 py-4 text-right font-medium text-slate-500 first:rounded-tl-[0.6rem] last:rounded-tr-[0.6rem]"
-                                            >
-                                                Rate
-                                            </x-base.table.td>
-                                            <x-base.table.td
-                                                class="border-slate-200/80 bg-slate-50 py-4 text-right font-medium text-slate-500 first:rounded-tl-[0.6rem] last:rounded-tr-[0.6rem]"
-                                            >
+                                                class="border-slate-200/80 bg-slate-50 py-4 text-right font-medium text-slate-500 first:rounded-tl-[0.6rem] last:rounded-tr-[0.6rem]">
                                                 Amount
                                             </x-base.table.td>
                                         </x-base.table.tr>
                                     </x-base.table.thead>
                                     <x-base.table.tbody>
-                                            <x-base.table.tr class="[&_td]:last:border-b-0">
-                                                <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                                    <div class="flex items-center">
-                                                        
-                                                        <div class="whitespace-nowrap">
-                                                            Plan
-                                                        </div>
-                                                    </div>
-                                                </x-base.table.td>
-                                                <x-base.table.td class="border-dashed py-4 text-right dark:bg-darkmode-600">
+                                        <x-base.table.tr class="[&_td]:last:border-b-0">
+                                            <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                <div class="flex items-center">
+
                                                     <div class="whitespace-nowrap">
-                                                       1
+                                                        {{$subscription->title}}
                                                     </div>
-                                                </x-base.table.td>
-                                                <x-base.table.td class="border-dashed py-4 text-right dark:bg-darkmode-600">
-                                                    <div class="whitespace-nowrap">
-                                                        $5000
-                                                    </div>
-                                                </x-base.table.td>
-                                                <x-base.table.td class="border-dashed py-4 text-right dark:bg-darkmode-600">
-                                                    <div class="whitespace-nowrap font-medium">
-                                                        $5000
-                                                    </div>
-                                                </x-base.table.td>
-                                            </x-base.table.tr>
+                                                </div>
+                                            </x-base.table.td>
+
+                                            <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                <div class="whitespace-nowrap">
+                                                    {{$subscription->duration_in_days}} days
+                                                </div>
+                                            </x-base.table.td>
+                                            <x-base.table.td class="border-dashed py-4 text-right dark:bg-darkmode-600">
+                                                <div class="whitespace-nowrap">
+                                                    @if($subscription->sale_price) {{$subscription->sale_price}} @else {{$subscription->price}} @endif
+                                                </div>
+                                            </x-base.table.td>
+
+                                        </x-base.table.tr>
                                     </x-base.table.tbody>
                                 </x-base.table>
                             </div>
@@ -151,33 +149,46 @@
                             <div class="flex items-center justify-end">
                                 <div class="text-slate-500">Subtotal:</div>
                                 <div class="w-20 font-medium text-slate-600 sm:w-52">
-                                    ${{ formatCurrency(floor(mt_rand(1300, 1600))) }}
+                                    <span id="init-subtotal" class="invisible">@if($subscription->sale_price)
+                                    {{$subscription->sale_price}} @else {{$subscription->price}} @endif</span>
+                                    $ <span id="subtotal">@if($subscription->sale_price) {{$subscription->sale_price}}
+                                    @else {{$subscription->price}} @endif</span>
                                 </div>
                             </div>
+
                             <div class="flex items-center justify-end">
-                                <div class="text-slate-500">Total:</div>
+                                <div class="text-slate-500">Coupons:</div>
                                 <div class="w-20 font-medium text-slate-600 sm:w-52">
-                                    ${{ formatCurrency(floor(mt_rand(1300, 1600))) }}
+                                    <x-base.input-group>
+                                        <x-base.form-input type="text" placeholder="coupon code" id="coupon_code" name="coupon_code" />
+                                    </x-base.input-group>
+                                    <x-base.input-group>
+                                        <x-base.button id="coupon-btn">Apply</x-base.button>
+                                    </x-base.input-group>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-end">
+                                <div class="text-slate-500">Coupons:</div>
+                                <div class="w-20 font-medium text-slate-600 sm:w-52">
+                                    <div id="coupon_amount">$0</div>
                                 </div>
                             </div>
                             <div class="flex items-center justify-end">
                                 <div class="text-slate-500">Tax:</div>
                                 <div class="w-20 font-medium text-slate-600 sm:w-52">
-                                    ${{ formatCurrency(floor(mt_rand(20, 50))) }}
+                                    $ <span id="tax">{{ $subscription->tax_amount }}</span>
                                 </div>
                             </div>
                             <div class="flex items-center justify-end">
-                                <div class="text-slate-500">Amount paid:</div>
+                                <div class="text-slate-500">Total:</div>
                                 <div class="w-20 font-medium text-slate-600 sm:w-52">
-                                    ${{ formatCurrency(floor(mt_rand(1300, 1600))) }}
+                                    $
+                                    <span id="total">@if($subscription->sale_price)
+                                    {{$subscription->sale_price + $subscription->tax_amount}} @else {{$subscription->pricee + $subscription->tax_amount}} @endif</span>
                                 </div>
                             </div>
-                            <div class="flex items-center justify-end">
-                                <div class="text-slate-500">Due balance:</div>
-                                <div class="w-20 font-medium text-slate-600 sm:w-52">
-                                    ${{ formatCurrency(floor(mt_rand(10, 30))) }}
-                                </div>
-                            </div>
+                            <x-base.button>Process</x-base.button>
                         </div>
                         <div class="-mx-8 border-t border-dashed border-slate-200/80 px-10 pt-6">
                             <div class="text-base font-medium">
@@ -189,140 +200,50 @@
                             <div class="mt-5 text-slate-500">© 2046 Left4code.</div>
                         </div>
                     </div>
+                </form>
                 </div>
-                <div class="col-span-12 xl:col-span-4">
-                    <div class="box box--stacked flex flex-col p-5">
-                        <div class="mb-5 border-b border-dashed border-slate-300/70 pb-5 text-[0.94rem] font-medium">
-                            History
-                        </div>
-                        <div>
-                            <div class="flex">
-                                <div>
-                                    <span class="text-lg font-medium">
-                                        {{ formatCurrency(mt_rand(2000, 4000)) }}
-                                    </span>
-                                    <span>Invoices</span>
-                                </div>
-                            </div>
-                            <div class="mt-3.5 flex h-2">
-                                <div
-                                    class="h-full w-[35%] border border-primary/50 bg-primary/50 first:rounded-l last:rounded-r">
-                                </div>
-                                <div class="h-full w-[20%] border border-info/50 bg-info/50 first:rounded-l last:rounded-r">
-                                </div>
-                                <div
-                                    class="h-full w-[45%] border border-success/50 bg-success/50 first:rounded-l last:rounded-r">
-                                </div>
-                            </div>
-                            <x-base.tab.group class="mt-8">
-                                <x-base.tab.list
-                                    class="rounded-[0.6rem] border-slate-200 bg-white shadow-sm"
-                                    variant="boxed-tabs"
-                                >
-                                    <x-base.tab
-                                        class="bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&[aria-selected='true']_button]:text-current"
-                                        id="example-1-tab"
-                                        selected
-                                    >
-                                        <x-base.tab.button
-                                            class="flex w-full items-center justify-center whitespace-nowrap rounded-[0.6rem] text-slate-500"
-                                            as="button"
-                                        >
-                                            <div class="mr-2 h-2 w-2 rounded-full border border-primary/60 bg-primary/60">
-                                            </div>
-                                            Pending ({{ mt_rand(100, 300) }})
-                                        </x-base.tab.button>
-                                    </x-base.tab>
-                                    <x-base.tab
-                                        class="bg-slate-50 first:rounded-l-[0.6rem] last:rounded-r-[0.6rem] [&[aria-selected='true']_button]:text-current"
-                                        id="example-2-tab"
-                                    >
-                                        <x-base.tab.button
-                                            class="flex w-full items-center justify-center whitespace-nowrap rounded-[0.6rem] text-slate-500"
-                                            as="button"
-                                        >
-                                            <div class="mr-2 h-2 w-2 rounded-full border border-danger/60 bg-danger/60">
-                                            </div>
-                                            Canceled ({{ mt_rand(100, 300) }})
-                                        </x-base.tab.button>
-                                    </x-base.tab>
-                                </x-base.tab.list>
-                                <x-base.tab.panels class="mt-3">
-                                    <x-base.tab.panel
-                                        id="example-1"
-                                        selected
-                                    >
-                                        <div class="rounded-[0.6rem] border border-dashed border-slate-300/80">
-                                            @foreach ($transactions->take(5) as $fakerKey => $faker)
-                                                <div
-                                                    class="flex cursor-pointer items-center border-b border-dashed border-slate-300/80 px-5 py-4 last:border-0 last:border-b-0 hover:bg-slate-50">
-                                                    <div>
-                                                        <div class="max-w-[12rem] truncate font-medium text-primary">
-                                                            {{ $faker['user']['name'] }}
-                                                        </div>
-                                                        <div class="mt-0.5 whitespace-nowrap text-slate-500">
-                                                            {{ $faker['category']['name'] }}
-                                                        </div>
-                                                        <div class="mt-1.5 text-xs text-slate-500">
-                                                            {{ $faker['orderDate'] }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="ml-auto whitespace-nowrap font-medium">
-                                                        ${{ $faker['amount'] }} USD
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <x-base.button
-                                            class="mt-3 w-full border-primary/[0.15] bg-white text-primary hover:bg-primary/20"
-                                            variant="primary"
-                                        >
-                                            View all invoices
-                                            <x-base.lucide
-                                                class="ml-2 h-4 w-4 stroke-[1.3]"
-                                                icon="ArrowRight"
-                                            />
-                                        </x-base.button>
-                                    </x-base.tab.panel>
-                                    <x-base.tab.panel>
-                                        <div class="rounded-[0.6rem] border border-dashed border-slate-300/80">
-                                            @foreach ($transactions->take(5) as $fakerKey => $faker)
-                                                <div
-                                                    class="flex cursor-pointer items-center border-b border-dashed border-slate-300/80 px-5 py-4 last:border-0 last:border-b-0 hover:bg-slate-50">
-                                                    <div>
-                                                        <div class="max-w-[12rem] truncate font-medium text-primary">
-                                                            {{ $faker['user']['name'] }}
-                                                        </div>
-                                                        <div class="mt-0.5 whitespace-nowrap text-slate-500">
-                                                            {{ $faker['category']['name'] }}
-                                                        </div>
-                                                        <div class="mt-1.5 text-xs text-slate-500">
-                                                            {{ $faker['orderDate'] }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="ml-auto whitespace-nowrap font-medium">
-                                                        ${{ $faker['amount'] }} USD
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <x-base.button
-                                            class="mt-3 w-full border-primary/[0.15] bg-white text-primary hover:bg-primary/20"
-                                            variant="primary"
-                                        >
-                                            View all invoices
-                                            <x-base.lucide
-                                                class="ml-2 h-4 w-4 stroke-[1.3]"
-                                                icon="ArrowRight"
-                                            />
-                                        </x-base.button>
-                                    </x-base.tab.panel>
-                                </x-base.tab.panels>
-                            </x-base.tab.group>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $('#coupon-btn').on('click', function (e) {
+            e.preventDefault();
+            $.ajax({
+                url: "{{route('restaurant.owner.apply.coupon')}}",
+                type: 'POST',
+                data: { coupon_code: $('#coupon_code').val(), '_token': "{{ csrf_token() }}" },
+                contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                success: function (result) {
+                    /* if found any coupon */
+                    var taxamt = parseFloat($('#tax').text());
+                    var total = parseFloat($('#total').text());
+                    var coupon_amount = 0;
+                    console.log('taxamt:' + taxamt);
+                    var subtotal = parseFloat($('#init-subtotal').text());
+                    if (result.status == 'success') {
+                        if(result.type=="flat" && result.cpnamt>0){
+                            coupon_amount = result.cpnamt;
+                        }
+                        if(result.type=="percentage" && result.cpnamt>0){
+                            coupon_amount = (parseFloat(result.cpnamt) * subtotal) / 100;
+                        }
+                        $('#total').text(subtotal - coupon_amount + taxamt);
+                        $('#coupon_amount').text('$' + coupon_amount);
+                    } else {
+                        $('#total').text(subtotal + taxamt);
+                        $('#coupon_amount').text('$' + 0);
+                    }
+                },
+
+                error: function () {
+                    console.log("error in fetching user info");
+                }
+            });
+        });
+    </script>
+@endpush

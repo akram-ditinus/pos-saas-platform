@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('uid')->unique();
             $table->string('title');
+            $table->string('tax_id')->nullable();
             $table->text('description')->nullable();
             $table->decimal('price',10,2)->default(0);
             $table->decimal('sale_price',10,2)->default(0)->nullable();
-            $table->decimal('duration_in_days',5,2)->default(0);
-            $table->decimal('trial_period_in_days',5,2)->default(0)->nullable();
+            $table->mediumInteger('duration_in_days')->default(0);
+            $table->mediumInteger('trial_period_in_days')->default(0)->nullable();
             $table->text('remarks')->nullable();
             $table->string('status')->default('active')->comment('pending,active,inactive',)->nullable();
             $table->timestamps();

@@ -153,6 +153,10 @@
                                     </x-base.table.td>
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
+                                        Tax Applied
+                                    </x-base.table.td>
+                                    <x-base.table.td
+                                        class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
                                         Number of days
                                     </x-base.table.td>
 
@@ -161,6 +165,10 @@
                                         Trial period in days
                                     </x-base.table.td>
 
+                                    <x-base.table.td
+                                        class="border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
+                                        Price
+                                    </x-base.table.td>
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                         Status
@@ -177,6 +185,7 @@
                                         <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                             <x-base.form-check.input type="checkbox" />
                                         </x-base.table.td>
+                                       
                                         <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
                                             {{ $subscription['title'] }}
 
@@ -184,7 +193,9 @@
                                                 Price (Sale Price)<br>
                                                 {{ $subscription['price']}} ({{$subscription['sale_price']}})
                                             </div>
-
+                                        </x-base.table.td>
+                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
+                                            @if(!empty($subscription['tax']['title']))  {{$subscription['tax']['title']}} @endif
                                         </x-base.table.td>
                                         <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                             {{ $subscription['duration_in_days'] }}
@@ -196,6 +207,10 @@
 
                                         </x-base.table.td>
 
+                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                            @if($subscription->sale_price) {{$subscription['sale_price']}} @else  {{$subscription['sale_price']}} @endif
+
+                                        </x-base.table.td>
                                         <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
                                             {{$subscription['status']}}
 

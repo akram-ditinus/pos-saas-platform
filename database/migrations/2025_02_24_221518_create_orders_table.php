@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('uid');
-            $table->foreignId('restaurant_owner_id')->constrained('users');
-            $table->foreignId('subscription_plan_id')->constrained('subscription_plans');
+            $table->string('order_no');
+            $table->string('restaurant_owner_id');
+            $table->string('subscription_plan_id');
             $table->string('coupon_id')->nullable();
             $table->decimal('coupon_discount',10,2)->default(0.00)->nullable();
             $table->string('tax_id')->nullable();
