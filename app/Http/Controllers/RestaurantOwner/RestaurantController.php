@@ -94,7 +94,7 @@ class RestaurantController extends Controller
     public function edit(string $id)
     {
         $restaurant = \App\Models\Restaurant::where('uid', $id)->first();
-        $countries = getCountriesArray();
+        $countries = array_column(getCountriesArray(),'name','dial_code');
         $currencies=\App\Models\Currency::all();
         return view('restaurant_owner.restaurants.edit', compact('restaurant', 'countries','currencies'));
     }

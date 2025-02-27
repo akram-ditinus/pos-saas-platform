@@ -1,5 +1,18 @@
 <?php
 
+
+use Carbon\Carbon;
+
+if (! function_exists('formatDates')) {
+    function formatDates($date=null,$format='d-M-Y')
+    {
+        if(is_null($date)) {
+            return null;
+        }
+        return Carbon::parse($date)->format($format);
+    }
+}
+
 if (!function_exists('merge')) {
     function merge($arrays)
     {

@@ -5,17 +5,15 @@ namespace App\Http\Controllers\SuperAdmin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RestaurantController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $restaurants = \App\Models\Restaurant::all();
-        $countries = array_column(getCountriesArray(),'name','dial_code');
-        //dd($countries);
-        return view("super_admin.restaurants.index", compact("restaurants",'countries'));
+        $settings=\App\Models\Setting::all();
+        return view("super_admin.settings.index",compact("settings"));
     }
 
     /**
@@ -39,11 +37,7 @@ class RestaurantController extends Controller
      */
     public function show(string $id)
     {
-        $currencies = \App\Models\Currency::all();
-        $countries = array_column(getCountriesArray(),'name','dial_code');
-        $restaurant=\App\Models\Restaurant::where('uid',$id)->first();
-       
-        return view("super_admin.restaurants.show", compact('countries','currencies','restaurant'));
+        //
     }
 
     /**
@@ -59,18 +53,9 @@ class RestaurantController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
-    /**
-     * Update the specified resource in storage.
-     */
-    public function restaurantUpdateStatus(Request $request)
-    {
-        
-        // "status": "active",
-        // "id": "yobe38pju0x5",
-        \App\Models\Restaurant::where('uid',$request->id)->update(['status'=>$request->status]);
-        
+        $setting=\App\Models\Setting::find($id);
+        $setting->update(['field_value'=>$request->field_value]);
+        return redirect()->back()->with('success',ucfirst(str_replace("_"," ",$setting->field_key)).' - updated successfully');
     }
 
     /**

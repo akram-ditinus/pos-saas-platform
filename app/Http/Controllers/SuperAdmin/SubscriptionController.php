@@ -12,7 +12,7 @@ class SubscriptionController extends Controller
      */
     public function index()
     {
-        $allSubscriptions = \App\Models\SubscriptionPlan::all();
+        $allSubscriptions = \App\Models\SubscriptionPlan::with('tax')->get();
         return view("super_admin.subscriptions.index", compact("allSubscriptions"));
     }
 
@@ -21,7 +21,8 @@ class SubscriptionController extends Controller
      */
     public function create()
     {
-        return view("super_admin.subscriptions.create");
+        $taxes= \App\Models\Tax::where('status','active')->get();
+        return view("super_admin.subscriptions.create",compact('taxes'));
     }
 
     /**
@@ -40,12 +41,15 @@ class SubscriptionController extends Controller
         $subscription->uid=getRandomCharactor(12,'SubscriptionPlan'); 
         //dd($subscription->uid);
         $subscription->title = $request->title;
+        $subscription->tax_id = $request->tax_id;
+        $subscription->description = $request->description;
         $subscription->price = $request->price;
         $subscription->sale_price = $request->sale_price;
         $subscription->trial_period_in_days = $request->trial_period_in_days;
         $subscription->duration_in_days = $request->duration_in_days;
         $subscription->remarks = $request->remarks;
         $subscription->status = $request->status;
+        // dd($subscription);
         $subscription->save();
         return redirect()->route('super.admin.subscriptions.index')->with("success", "Subscription added successfully");
     }
@@ -63,8 +67,10 @@ class SubscriptionController extends Controller
      */
     public function edit(string $id)
     {
-        $subscription = \App\Models\SubscriptionPlan::where('uid',$id)->first();
-        return view("super_admin.subscriptions.edit",compact("subscription"));
+        $taxes= \App\Models\Tax::where('status','active')->get();
+        $subscription = \App\Models\SubscriptionPlan::with('tax')->where('uid',$id)->first();
+        // dd($subscription);
+        return view("super_admin.subscriptions.edit",compact("subscription","taxes"));
     }
 
     /**
@@ -73,11 +79,11 @@ class SubscriptionController extends Controller
     public function update(Request $request, string $id)
     {
     
-
         $subscription = \App\Models\SubscriptionPlan::where('uid',$id)->first();
-        // $subscription->uid=getRandomCharactor(12,'SubscriptionPlan'); 
-        // dd($subscription->uid);
+
         $subscription->title = $request->title;
+        $subscription->tax_id = $request->tax_id;
+        $subscription->description = $request->description;
         $subscription->price = $request->price;
         $subscription->sale_price = $request->sale_price;
         $subscription->trial_period_in_days = $request->trial_period_in_days;
@@ -85,8 +91,6 @@ class SubscriptionController extends Controller
         $subscription->remarks = $request->remarks;
         $subscription->status = $request->status;
         
-        // dump($subscription);
-        // dd($request->all());
         $subscription->save();
         return redirect()->route('super.admin.subscriptions.index')->with("success", "Subscription updated successfully");
     }

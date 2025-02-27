@@ -11,14 +11,14 @@
 
             <div class="flex flex-col gap-y-3 md:h-10 md:flex-row md:items-center">
                 <div class="text-base font-medium group-[.mode--light]:text-white">
-                    Subscriptions
+                    Coupons
                 </div>
                 <div class="flex flex-col gap-x-3 gap-y-2 sm:flex-row md:ml-auto">
                     <x-base.menu.item
                         class="group-[.mode--light]:!border-transparent group-[.mode--light]:!bg-white/[0.12] group-[.mode--light]:!text-slate-200"
-                        variant="primary" href="{{route('super.admin.subscriptions.create')}}">
+                        variant="primary" href="{{route('super.admin.coupons.create')}}">
                         <x-base.lucide class="mr-2 h-4 w-4 stroke-[1.3]" icon="PenLine" />
-                        Add New Subscription
+                        Add New Coupon
                     </x-base.menu.item>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <div class="grid grid-cols-3 gap-5">
                         <div
                             class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                            <div class="text-base text-slate-500">All Subscriptions</div>
+                            <div class="text-base text-slate-500">All Coupons</div>
                             <div class="mt-1.5 text-2xl font-medium">2</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
 
@@ -35,7 +35,7 @@
                         </div>
                         <div
                             class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                            <div class="text-base text-slate-500">Active Subscriptions</div>
+                            <div class="text-base text-slate-500">Active Coupons</div>
                             <div class="mt-1.5 text-2xl font-medium">1</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
 
@@ -43,7 +43,7 @@
                         </div>
                         <div
                             class="box col-span-4 rounded-[0.6rem] border border-dashed border-slate-300/80 p-5 shadow-sm md:col-span-2 xl:col-span-1">
-                            <div class="text-base text-slate-500">Inactive Subscriptions</div>
+                            <div class="text-base text-slate-500">Inactive Coupons</div>
                             <div class="font-mediumm mt-1.5 text-2xl">0</div>
                             <div class="absolute inset-y-0 right-0 mr-5 flex flex-col justify-center">
 
@@ -153,26 +153,22 @@
                                     </x-base.table.td>
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                        Tax Applied
+                                        Code
                                     </x-base.table.td>
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                        Number of days
+                                        Type
                                     </x-base.table.td>
-
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 font-medium text-slate-500">
-                                        Trial period in days
+                                        Amount
                                     </x-base.table.td>
 
-                                    <x-base.table.td
-                                        class="border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
-                                        Price
-                                    </x-base.table.td>
                                     <x-base.table.td
                                         class="border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                         Status
                                     </x-base.table.td>
+
                                     <x-base.table.td
                                         class="w-20 border-t border-slate-200/60 bg-slate-50 py-4 text-center font-medium text-slate-500">
                                         Action
@@ -180,96 +176,90 @@
                                 </x-base.table.tr>
                             </x-base.table.thead>
                             <x-base.table.tbody>
-                                @foreach ($allSubscriptions as $Key => $subscription)
-                                    <x-base.table.tr class="[&_td]:last:border-b-0">
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            <x-base.form-check.input type="checkbox" />
-                                        </x-base.table.td>
-                                       
-                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
-                                            {{ $subscription['title'] }}
+                                @foreach ($coupons as $Key => $coupon)
+                                                    <x-base.table.tr class="[&_td]:last:border-b-0">
+                                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                            <x-base.form-check.input type="checkbox" />
+                                                        </x-base.table.td>
+                                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
+                                                            <div class="flex items-center">
 
-                                            <div class="mt-0.5 whitespace-nowrap text-xs text-slate-500">
-                                                Price (Sale Price)<br>
-                                                {{ $subscription['price']}} ({{$subscription['sale_price']}})
-                                            </div>
-                                        </x-base.table.td>
-                                        <x-base.table.td class="w-80 border-dashed py-4 dark:bg-darkmode-600">
-                                            @if(!empty($subscription['tax']['title']))  {{$subscription['tax']['title']}} @endif
-                                        </x-base.table.td>
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            {{ $subscription['duration_in_days'] }}
+                                                                <div class="ml-3.5">
 
-                                        </x-base.table.td>
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            {{ $subscription['trial_period_in_days'] }}
+                                                                    {{ $coupon['title'] }}
 
+                                                                </div>
+                                                            </div>
+                                                        </x-base.table.td>
+                                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                            {{ $coupon['code'] }}
 
-                                        </x-base.table.td>
+                                                        </x-base.table.td>
+                                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                            {{ $coupon['type'] }}
 
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            @if($subscription->sale_price) {{$subscription['sale_price']}} @else  {{$subscription['sale_price']}} @endif
+                                                        </x-base.table.td>
+                                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                            {{ $coupon['amount'] }}
 
-                                        </x-base.table.td>
-                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
-                                            {{$subscription['status']}}
+                                                        </x-base.table.td>
 
-                                        </x-base.table.td>
+                                                        <x-base.table.td class="border-dashed py-4 dark:bg-darkmode-600">
+                                                            {{$coupon['status']}}
+                                        </div>
+                                    </div>
+                                    </x-base.table.td>
 
-                                        <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
-                                            <div class="flex items-center justify-center">
-                                                <x-base.menu class="h-5">
-                                                    <x-base.menu.button class="h-5 w-5 text-slate-500">
-                                                        <x-base.lucide class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70"
-                                                            icon="MoreVertical" />
-                                                    </x-base.menu.button>
-                                                    <x-base.menu.items class="w-40">
-                                                        <x-base.menu.item
-                                                            href="{{route('super.admin.subscriptions.edit', $subscription->uid)}}">
-                                                            <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
-                                                            Edit
-                                                        </x-base.menu.item>
-                                                        <x-base.menu.item class="text-danger">
-                                                            <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" />
-                                                            Delete
-                                                        </x-base.menu.item>
-                                                    </x-base.menu.items>
-                                                </x-base.menu>
-                                            </div>
-                                        </x-base.table.td>
+                                    <x-base.table.td class="relative border-dashed py-4 dark:bg-darkmode-600">
+                                        <div class="flex items-center justify-center">
+                                            <x-base.menu class="h-5">
+                                                <x-base.menu.button class="h-5 w-5 text-slate-500">
+                                                    <x-base.lucide class="h-5 w-5 fill-slate-400/70 stroke-slate-400/70" icon="MoreVertical" />
+                                                </x-base.menu.button>
+                                                <x-base.menu.items class="w-40">
+                                                    <x-base.menu.item href="{{route('super.admin.coupons.edit', $coupon->uid)}}">
+                                                        <x-base.lucide class="mr-2 h-4 w-4" icon="CheckSquare" />
+                                                        Edit
+                                                    </x-base.menu.item>
+                                                    <x-base.menu.item class="text-danger">
+                                                        <x-base.lucide class="mr-2 h-4 w-4" icon="Trash2" />
+                                                        Delete
+                                                    </x-base.menu.item>
+                                                </x-base.menu.items>
+                                            </x-base.menu>
+                                        </div>
+                                    </x-base.table.td>
                                     </x-base.table.tr>
                                 @endforeach
-                            </x-base.table.tbody>
-                        </x-base.table>
-                    </div>
-                    <div class="flex-reverse flex flex-col-reverse flex-wrap items-center gap-y-2 p-5 sm:flex-row">
-                        <x-base.pagination class="mr-auto w-full flex-1 sm:w-auto">
-                            <x-base.pagination.link>
-                                <x-base.lucide class="h-4 w-4" icon="ChevronsLeft" />
-                            </x-base.pagination.link>
-                            <x-base.pagination.link>
-                                <x-base.lucide class="h-4 w-4" icon="ChevronLeft" />
-                            </x-base.pagination.link>
-                            <x-base.pagination.link>...</x-base.pagination.link>
-                            <x-base.pagination.link>1</x-base.pagination.link>
-                            <x-base.pagination.link active>2</x-base.pagination.link>
-                            <x-base.pagination.link>3</x-base.pagination.link>
-                            <x-base.pagination.link>...</x-base.pagination.link>
-                            <x-base.pagination.link>
-                                <x-base.lucide class="h-4 w-4" icon="ChevronRight" />
-                            </x-base.pagination.link>
-                            <x-base.pagination.link>
-                                <x-base.lucide class="h-4 w-4" icon="ChevronsRight" />
-                            </x-base.pagination.link>
-                        </x-base.pagination>
-                        <x-base.form-select class="rounded-[0.5rem] sm:w-20">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>35</option>
-                            <option>50</option>
-                        </x-base.form-select>
-                    </div>
-                </div>
+                </x-base.table.tbody>
+                </x-base.table>
+            </div>
+            <div class="flex-reverse flex flex-col-reverse flex-wrap items-center gap-y-2 p-5 sm:flex-row">
+                <x-base.pagination class="mr-auto w-full flex-1 sm:w-auto">
+                    <x-base.pagination.link>
+                        <x-base.lucide class="h-4 w-4" icon="ChevronsLeft" />
+                    </x-base.pagination.link>
+                    <x-base.pagination.link>
+                        <x-base.lucide class="h-4 w-4" icon="ChevronLeft" />
+                    </x-base.pagination.link>
+                    <x-base.pagination.link>...</x-base.pagination.link>
+                    <x-base.pagination.link>1</x-base.pagination.link>
+                    <x-base.pagination.link active>2</x-base.pagination.link>
+                    <x-base.pagination.link>3</x-base.pagination.link>
+                    <x-base.pagination.link>...</x-base.pagination.link>
+                    <x-base.pagination.link>
+                        <x-base.lucide class="h-4 w-4" icon="ChevronRight" />
+                    </x-base.pagination.link>
+                    <x-base.pagination.link>
+                        <x-base.lucide class="h-4 w-4" icon="ChevronsRight" />
+                    </x-base.pagination.link>
+                </x-base.pagination>
+                <x-base.form-select class="rounded-[0.5rem] sm:w-20">
+                    <option>10</option>
+                    <option>25</option>
+                    <option>35</option>
+                    <option>50</option>
+                </x-base.form-select>
             </div>
         </div>
     </div>

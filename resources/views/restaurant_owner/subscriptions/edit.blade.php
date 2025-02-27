@@ -6,7 +6,7 @@
 
 @section('subcontent')
     <div class="grid grid-cols-12 gap-x-6 gap-y-10">
-        <div class="col-span-12 sm:col-span-10 sm:col-start-2">
+        <div class="col-span-12 sm:col-span-10 sm:col-start-3">
             <div class="flex flex-col gap-y-2 lg:flex-row lg:items-center">
                 <div @class([
                     'flex items-center lg:justify-center flex-1 lg:first:justify-start lg:last:justify-end group active',
@@ -23,8 +23,7 @@
                                 1
                             </div>
                         </div>
-                        <div
-                            class="ml-3.5 whitespace-nowrap font-medium text-slate-500 group-[.active]:text-current group-[.mode--light]:!text-slate-300 [.group.mode--light_.group.active_&]:!text-slate-100">
+                        <div class="ml-3.5 whitespace-nowrap font-medium text-slate-500 group-[.active]:text-current group-[.mode--light]:!text-slate-300 [.group.mode--light_.group.active_&]:!text-slate-100">
                             Personal Information
                         </div>
                     </div>
@@ -75,7 +74,7 @@
             <div class="mt-7">
                 <form method="POST" action="{{route('restaurant.owner.restaurants.update',$restaurant->uid)}}">
                     @csrf
-                    @method('patch');
+                    @method('patch')
                     <div class="box box--stacked flex flex-col">
                         <div class="p-7">
                             <div class="mt-5 block flex-col pt-5 first:mt-0 first:pt-0 sm:flex xl:flex-row xl:items-center">
